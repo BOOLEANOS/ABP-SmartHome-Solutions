@@ -1,6 +1,7 @@
-from usuarios import registrar_usuario, iniciar_sesion
+from usuarios import registrar_usuario, iniciar_sesion, modificar_rol_usuario
 from dispositivos import *
 from automatizaciones import activar_modo_ahorro
+
 
 def mostrar_menu_principal():
     print("\n=== SmartHome Solutions ===")
@@ -75,3 +76,24 @@ def menu_principal(dispositivos, usuarios):
             app_activa = False
         else:
             print("Opción inválida.")
+            
+def menu_admin(usuarios, dispositivos, automatizaciones, admin):
+    while True:
+        print("\n--- MENÚ ADMINISTRADOR ---")
+        print("1. Consultar automatizaciones activas") #completa lore
+        print("2. Gestionar dispositivos (no implementado aún)")
+        print("3. Modificar rol de un usuario")
+        print("4. Salir")
+
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            consultar_automatizaciones(automatizaciones) #completa lore
+        elif opcion == "2":
+            print("Función de gestión de dispositivos aún no disponible.")
+        elif opcion == "3":
+            modificar_rol_usuario(usuarios)
+        elif opcion == "4":
+            break
+        else:
+            print("Opción inválida.")
+
