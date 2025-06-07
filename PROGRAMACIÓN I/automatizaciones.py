@@ -7,3 +7,4 @@ def activar_modo_ahorro(dispositivos, usuario):
             d["estado"] = False
             apagados += 1
     print(f"Se apagaron {apagados} dispositivo(s) no esenciales.")
+    print #lorenapereyra
