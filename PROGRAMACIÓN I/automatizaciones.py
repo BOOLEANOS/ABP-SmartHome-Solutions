@@ -6,4 +6,4 @@ def activar_modo_ahorro(dispositivos, usuario):
         if d["usuario_id"] == usuario["id"] and d["tipo"] not in ["cámara", "alarma"]:
             d["estado"] = False
             apagados += 1
-    print(f"Se apagaron {apagados} dispositivo(s) no esenciales.")
+    print(f"Se apagaron {apagados} dispositivo(s) no esenciales. ")
