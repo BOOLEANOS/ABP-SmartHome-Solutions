@@ -23,4 +23,3 @@ def iniciar_sesion(usuarios):
             print("Inicio de sesión exitoso.")
             return usuario
     print("Credenciales incorrectas.")
-print("hola")

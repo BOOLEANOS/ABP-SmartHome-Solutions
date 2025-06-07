@@ -1,52 +1,42 @@
 # dispositivos.py
-def menu_dispositivos(dispositivos, usuario):
-    while True:
-        print("\n--- Gestión de Dispositivos ---")
-        print("1. Listar dispositivos")
-        print("2. Agregar dispositivo")
-        print("3. Eliminar dispositivo")
-        print("4. Volver al menú anterior")
-        opcion = input("Seleccione una opción: ")
 
-        if opcion == "1":
-            listar_dispositivos(dispositivos, usuario)
-        elif opcion == "2":
-            agregar_dispositivo(dispositivos, usuario)
-        elif opcion == "3":
-            eliminar_dispositivo(dispositivos, usuario)
-        elif opcion == "4":
-            break
-        else:
-            print("Opción inválida.")
-
-def listar_dispositivos(dispositivos, usuario):
+def mostrar_dispositivos_usuario(dispositivos, usuario):
     print("\nDispositivos registrados:")
-    encontrados = False
-    for d in dispositivos:
-        if d["usuario_id"] == usuario["id"]:
-            print(f"- {d['nombre']} ({d['tipo']}), Estado: {'Encendido' if d['estado'] else 'Apagado'}")
-            encontrados = True
-    if not encontrados:
-        print("No hay dispositivos registrados.")
+    user_devices = [d for d in dispositivos if d["usuario_id"] == usuario["id"]]
 
-def agregar_dispositivo(dispositivos, usuario):
-    nombre = input("Nombre del dispositivo: ")
-    tipo = input("Tipo (luz, cámara, termostato, etc.): ")
-    nuevo = {
+    if not user_devices:
+        print("No hay dispositivos registrados.")
+        return
+
+    for idx, d in enumerate(user_devices, 1):
+        estado = "Encendido" if d["estado"] else "Apagado"
+        print(f"{idx}. {d['nombre']} ({d['tipo']}) - Estado: {estado}")
+
+def crear_dispositivo(dispositivos, usuario):
+    nombre = input("Nombre del dispositivo: ").strip()
+    tipo = input("Tipo (luz, cámara, termostato, etc.): ").strip()
+
+    if not nombre or not tipo:
+        print("Nombre y tipo son obligatorios.")
+        return
+
+    nuevo_dispositivo = {
         "id": len(dispositivos) + 1,
         "nombre": nombre,
         "tipo": tipo,
         "estado": True,
         "usuario_id": usuario["id"]
     }
-    dispositivos.append(nuevo)
-    print("Dispositivo agregado con éxito.")
+    dispositivos.append(nuevo_dispositivo)
+    print(f" Dispositivo '{nombre}' agregado correctamente.")
 
-def eliminar_dispositivo(dispositivos, usuario):
-    nombre = input("Nombre del dispositivo a eliminar: ")
+def eliminar_dispositivo_por_nombre(dispositivos, usuario):
+    nombre = input("Ingrese el nombre del dispositivo a eliminar: ").strip()
+
     for d in dispositivos:
-        if d["usuario_id"] == usuario["id"] and d["nombre"] == nombre:
+        if d["usuario_id"] == usuario["id"] and d["nombre"].lower() == nombre.lower():
             dispositivos.remove(d)
-            print("Dispositivo eliminado.")
+            print(f"Dispositivo '{nombre}' eliminado.")
             return
-    print("Dispositivo no encontrado.")
+
+    print("Dispositivo no encontrado o no pertenece a su cuenta.")
