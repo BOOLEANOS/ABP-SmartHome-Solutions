@@ -1,16 +1,19 @@
 # usuarios.py
 def registrar_usuario(usuarios):
-    nombre = input("Nombre: ")
-    correo = input("Correo: ")
-    contrasena = input("Contraseña: ")
-    nuevo_usuario = {
+    nombre = input("Ingrese su nombre: ")
+    correo = input("Ingrese su correo: ")
+    contrasena = input("Cree una contraseña: ")
+
+    rol = "admin" if not usuarios else "usuario"
+    usuarios.append({
         "id": len(usuarios) + 1,
         "nombre": nombre,
         "correo": correo,
-        "contrasena": contrasena
-    }
-    usuarios.append(nuevo_usuario)
-    print("Usuario registrado con éxito.")
+        "contrasena": contrasena,
+        "rol": rol
+    })
+
+    print(f"Usuario {nombre} registrado con éxito como {'Administrador' if rol == 'admin' else 'Usuario'}.")
 
 def iniciar_sesion(usuarios):
     correo = input("Correo: ")
@@ -20,4 +23,3 @@ def iniciar_sesion(usuarios):
             print("Inicio de sesión exitoso.")
             return usuario
     print("Credenciales incorrectas.")
-    return None
