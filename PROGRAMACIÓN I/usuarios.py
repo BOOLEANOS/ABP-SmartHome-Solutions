@@ -23,3 +23,16 @@ def iniciar_sesion(usuarios):
             print("Inicio de sesión exitoso.")
             return usuario
     print("Credenciales incorrectas.")
+    
+def modificar_rol_usuario(usuarios):
+    correo = input("Correo del usuario a modificar: ")
+    for u in usuarios:
+        if u["correo"] == correo:
+            nuevo_rol = input("Nuevo rol (admin / estándar): ").lower()
+            if nuevo_rol in ["admin", "estándar"]:
+                u["rol"] = nuevo_rol
+                print(f"Rol actualizado a {nuevo_rol}.")
+            else:
+                print("Rol inválido.")
+            return
+    print("Usuario no encontrado.")
