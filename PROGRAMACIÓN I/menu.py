@@ -1,4 +1,4 @@
-from usuarios import registrar_usuario, iniciar_sesion, modificar_rol_usuario
+from usuarios import registrar_usuario, iniciar_sesion, modificar_rol_usuario, datos_usuario
 from dispositivos import *
 from automatizaciones import activar_modo_ahorro
 
@@ -75,11 +75,13 @@ def menu_usuario_estandar(dispositivos, usuario):
     while sesion_activa:
         opcion = mostrar_menu_usuario_estandar(usuario["nombre"], usuario["rol"])
         if opcion == "1":
-            print("Consultado los datos personales")
+            print("Consultando los datos personales...\n")
+            datos_usuario(usuario)
         elif opcion == "2":
             print("Ir al menu modo ahorro de bateria")
         elif opcion == "3":
-            print("Consultando dispositivos")
+            print("Consultando dispositivos...\n")
+            mostrar_dispositivos_usuario(dispositivos, usuario)
         elif opcion == "4":
             autenticado = None
             sesion_activa = False
