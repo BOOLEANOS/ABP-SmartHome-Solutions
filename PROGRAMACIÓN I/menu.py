@@ -22,6 +22,7 @@ def mostrar_menu_usuario_estandar(nombre, rol):
     print("1. Consultar los datos personales")
     print("2. Menu Modo Ahorro de Energía")
     print("3. Consultar dispositivos")
+    print("4. Cerrar sesión")
     return input("Seleccione una opción: ")
 
 def mostrar_menu_dispositivos():
@@ -79,6 +80,10 @@ def menu_usuario_estandar(dispositivos, usuario):
             print("Ir al menu modo ahorro de bateria")
         elif opcion == "3":
             print("Consultando dispositivos")
+        elif opcion == "4":
+            autenticado = None
+            sesion_activa = False
+            print("Sesión cerrada.")
         else:
             print("Opción inválida.")
 
