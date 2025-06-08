@@ -1,6 +1,6 @@
 from usuarios import registrar_usuario, iniciar_sesion, modificar_rol_usuario, datos_usuario
 from dispositivos import *
-from automatizaciones import activar_modo_ahorro
+from automatizaciones import activar_modo_ahorro, configurar_modo_ahorro, consultar_automatizaciones
 
 
 def mostrar_menu_principal():
@@ -36,23 +36,23 @@ def mostrar_menu_dispositivos():
 def mostrar_menu_automatizaciones():
     print("\n--- Gestión de modo ahorro de energía ---")
     print("1. Activar automatización")
-    print("2. Ejecutar automatización")
-    print("3. Configurar automatización")
-    print("4. Volver al menú anterior")
+    print("2. Configurar automatización")
+    print("3. Volver al menú anterior")
     return input("Seleccione una opción: ")
 
 def gestionar_automatizacion(dispositivos, usuario):
     opcion = ""
-    while opcion != "4":
+    while opcion != "3":
         opcion = mostrar_menu_automatizaciones()
         match opcion:
             case "1":
-                print("Activando modo ahorro de energía...")
+                activar_modo_ahorro(dispositivos, usuario)
             case "2":
-                print("Ejecutando modo ahorro de energía...")
-            case "3":
                 print("Configurando modo ahorro de energía...")
-            case "4":
+                horaOn = input("Ingrese la hora para encender las luces: ")
+                horaOff = input("Ingrese la hora para apagar las luces: ")
+                configurar_modo_ahorro(horaOn, horaOff)
+            case "3":
                 print("Volviendo al menú anterior...")
             case _:
                 print("Opción inválida. Intente nuevamente.")
