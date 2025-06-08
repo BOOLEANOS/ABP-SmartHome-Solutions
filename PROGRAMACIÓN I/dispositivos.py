@@ -46,6 +46,10 @@ def cambiar_estado_dispositivo(dispositivos, estado):
     for d in dispositivos:
         if d["nombre"].lower() == nombre.lower():
             d["estado"] = estado
+            if (estado):
+                print("Dispositivo activado correctamente.")
+            else:
+                print("Dispositivo desactivado correctamente.")
             return
 
     print("Dispositivo no encontrado o no pertenece a su cuenta.")
