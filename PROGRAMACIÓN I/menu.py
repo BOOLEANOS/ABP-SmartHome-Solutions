@@ -17,6 +17,13 @@ def mostrar_menu_usuario_admin(nombre, rol):
     print("3. Cerrar sesión")
     return input("Seleccione una opción: ")
 
+def mostrar_menu_usuario_estandar(nombre, rol):
+    print(f"\nBienvenido/a {nombre} ({rol})!")
+    print("1. Consultar los datos personales")
+    print("2. Menu Modo Ahorro de Energía")
+    print("3. Consultar dispositivos")
+    return input("Seleccione una opción: ")
+
 def mostrar_menu_dispositivos():
     print("\n--- Gestión de Dispositivos ---")
     print("1. Listar dispositivos")
@@ -58,6 +65,22 @@ def menu_usuario_admin(dispositivos, usuario):
             sesion_activa = False
         else:
             print("Opción inválida.")
+    
+def menu_usuario_estandar(dispositivos, usuario):
+    global autenticado
+    autenticado = usuario
+    sesion_activa = True
+    print("entro sesion activa")
+    while sesion_activa:
+        opcion = mostrar_menu_usuario_estandar(usuario["nombre"], usuario["rol"])
+        if opcion == "1":
+            print("Consultado los datos personales")
+        elif opcion == "2":
+            print("Ir al menu modo ahorro de bateria")
+        elif opcion == "3":
+            print("Consultando dispositivos")
+        else:
+            print("Opción inválida.")
 
 def menu_principal(dispositivos, usuarios):
     app_activa = True
@@ -69,8 +92,10 @@ def menu_principal(dispositivos, usuarios):
             registrar_usuario(usuarios)
         elif opcion == "2":
             usuario = iniciar_sesion(usuarios)
-            if usuario:
+            if usuario["rol"] == "admin":
                 menu_usuario_admin(dispositivos, usuario)
+            else:
+                menu_usuario_estandar(dispositivos, usuario)
         elif opcion == "3":
             print("¡Hasta luego!")
             app_activa = False
