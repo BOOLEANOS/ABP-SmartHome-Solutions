@@ -2,13 +2,12 @@
 
 def mostrar_dispositivos_usuario(dispositivos, usuario):
     print("\nDispositivos registrados:")
-    user_devices = [d for d in dispositivos if d["usuario_id"] == usuario["id"]]
 
-    if not user_devices:
+    if not dispositivos:
         print("No hay dispositivos registrados.")
         return
 
-    for idx, d in enumerate(user_devices, 1):
+    for idx, d in enumerate(dispositivos, 1):
         estado = "Encendido" if d["estado"] else "Apagado"
         print(f"{idx}. {d['nombre']} ({d['tipo']}) - Estado: {estado}")
 
@@ -34,7 +33,7 @@ def eliminar_dispositivo_por_nombre(dispositivos, usuario):
     nombre = input("Ingrese el nombre del dispositivo a eliminar: ").strip()
 
     for d in dispositivos:
-        if d["usuario_id"] == usuario["id"] and d["nombre"].lower() == nombre.lower():
+        if d["nombre"].lower() == nombre.lower():
             dispositivos.remove(d)
             print(f"Dispositivo '{nombre}' eliminado.")
             return
