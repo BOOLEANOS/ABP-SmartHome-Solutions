@@ -39,3 +39,13 @@ def eliminar_dispositivo_por_nombre(dispositivos, usuario):
             return
 
     print("Dispositivo no encontrado o no pertenece a su cuenta.")
+
+def cambiar_estado_dispositivo(dispositivos, estado):
+    nombre = input("Ingrese el nombre del dispositivo: ").strip()
+
+    for d in dispositivos:
+        if d["nombre"].lower() == nombre.lower():
+            d["estado"] = estado
+            return
+
+    print("Dispositivo no encontrado o no pertenece a su cuenta.")

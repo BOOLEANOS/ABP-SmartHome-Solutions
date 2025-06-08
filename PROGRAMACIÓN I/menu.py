@@ -30,7 +30,14 @@ def mostrar_menu_dispositivos():
     print("1. Listar dispositivos")
     print("2. Agregar dispositivo")
     print("3. Eliminar dispositivo")
-    print("4. Volver al menú anterior")
+    print("4. Activar/desactivar dispositivo")
+    print("5. Volver al menú anterior")
+    return input("Seleccione una opción: ")
+
+def mostrar_menu_cambio_estado_dispositivo():
+    print("\nDesea:")
+    print("1. Activar dispositivos")
+    print("2. Desactivar dispositivo")
     return input("Seleccione una opción: ")
 
 def mostrar_menu_automatizaciones():
@@ -59,7 +66,7 @@ def gestionar_automatizacion(dispositivos, usuario):
 
 def gestionar_dispositivos(dispositivos, usuario):
     opcion = ""
-    while opcion != "4":
+    while opcion != "5":
         opcion = mostrar_menu_dispositivos()
         match opcion:
             case "1":
@@ -69,9 +76,24 @@ def gestionar_dispositivos(dispositivos, usuario):
             case "3":
                 eliminar_dispositivo_por_nombre(dispositivos, usuario)
             case "4":
+                activar_desactivar_dispositivo(dispositivos)
+            case "5":
                 print("Volviendo al menú anterior...")
             case _:
                 print("Opción inválida. Intente nuevamente.")
+    
+def activar_desactivar_dispositivo(dispositivos):
+    opcion = ""
+    while opcion != "1" and opcion != "2":
+        opcion = mostrar_menu_cambio_estado_dispositivo()
+        match opcion:
+            case "1":
+                cambiar_estado_dispositivo(dispositivos, True)
+            case "2":
+                cambiar_estado_dispositivo(dispositivos, False)
+            case _:
+                print("Opción inválida. Intente nuevamente.")
+
     
 def menu_usuario_admin(dispositivos, usuario):
     global autenticado
