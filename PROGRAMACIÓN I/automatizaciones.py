@@ -1,6 +1,6 @@
 # automatizaciones.py
-lucesOn = "18"
-lucesOff = "23"
+luces_on = "18"
+luces_off = "23"
 
 def activar_modo_ahorro(dispositivos, usuario):
     print("\nActivando Modo Ahorro de Energía...")
@@ -14,7 +14,7 @@ def activar_modo_ahorro(dispositivos, usuario):
     #simular de datos en memoria
     usuarios =[]
     dispositivos = []
-    automatizaciones =[f"Encender luces a las {lucesOn}", f"Apagar luces a las {lucesOff}"]
+    automatizaciones =[f"Encender luces a las {luces_on}", f"Apagar luces a las {luces_off}"]
     consultar_automatizaciones(automatizaciones)
     
 def consultar_automatizaciones(automatizaciones):
@@ -25,11 +25,11 @@ def consultar_automatizaciones(automatizaciones):
     for auto in automatizaciones:
         print (f"- {auto}")
 
-def configurar_modo_ahorro(horaOn, horaOff):
-    global lucesOn
-    global lucesOff
-    lucesOn = horaOn
-    lucesOff = horaOff
+def configurar_modo_ahorro(hora_on, hora_off):
+    global luces_on
+    global luces_off
+    luces_on = hora_on
+    luces_off = hora_off
         
        
 
