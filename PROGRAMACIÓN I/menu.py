@@ -20,7 +20,7 @@ def mostrar_menu_usuario_admin(nombre, rol):
 def mostrar_menu_usuario_estandar(nombre, rol):
     print(f"\nBienvenido/a {nombre} ({rol})!")
     print("1. Consultar los datos personales")
-    print("2. Menu Modo Ahorro de Energía")
+    print("2. Menu modo ahorro de energía")
     print("3. Consultar dispositivos")
     print("4. Cerrar sesión")
     return input("Seleccione una opción: ")
@@ -32,6 +32,30 @@ def mostrar_menu_dispositivos():
     print("3. Eliminar dispositivo")
     print("4. Volver al menú anterior")
     return input("Seleccione una opción: ")
+
+def mostrar_menu_automatizaciones():
+    print("\n--- Gestión de modo ahorro de energía ---")
+    print("1. Activar automatización")
+    print("2. Ejecutar automatización")
+    print("3. Configurar automatización")
+    print("4. Volver al menú anterior")
+    return input("Seleccione una opción: ")
+
+def gestionar_automatizacion(dispositivos, usuario):
+    opcion = ""
+    while opcion != "4":
+        opcion = mostrar_menu_automatizaciones()
+        match opcion:
+            case "1":
+                print("Activando modo ahorro de energía...")
+            case "2":
+                print("Ejecutando modo ahorro de energía...")
+            case "3":
+                print("Configurando modo ahorro de energía...")
+            case "4":
+                print("Volviendo al menú anterior...")
+            case _:
+                print("Opción inválida. Intente nuevamente.")
 
 def gestionar_dispositivos(dispositivos, usuario):
     opcion = ""
@@ -78,7 +102,7 @@ def menu_usuario_estandar(dispositivos, usuario):
             print("Consultando los datos personales...\n")
             datos_usuario(usuario)
         elif opcion == "2":
-            print("Ir al menu modo ahorro de bateria")
+            gestionar_automatizacion(dispositivos, usuario)
         elif opcion == "3":
             print("Consultando dispositivos...\n")
             mostrar_dispositivos_usuario(dispositivos, usuario)
