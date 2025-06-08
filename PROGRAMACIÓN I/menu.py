@@ -17,8 +17,8 @@ def mostrar_menu_usuario_admin(nombre, rol):
     print("3. Cerrar sesión")
     return input("Seleccione una opción: ")
 
-def mostrar_menu_usuario_estandar(nombre, rol):
-    print(f"\nBienvenido/a {nombre} ({rol})!")
+def mostrar_menu_usuario_estandar(nombre):
+    print(f"\nBienvenido/a {nombre}")
     print("1. Consultar los datos personales")
     print("2. Menu modo ahorro de energía")
     print("3. Consultar dispositivos")
@@ -97,7 +97,7 @@ def menu_usuario_estandar(dispositivos, usuario):
     sesion_activa = True
     print("entro sesion activa")
     while sesion_activa:
-        opcion = mostrar_menu_usuario_estandar(usuario["nombre"], usuario["rol"])
+        opcion = mostrar_menu_usuario_estandar(usuario["nombre"])
         if opcion == "1":
             print("Consultando los datos personales...\n")
             datos_usuario(usuario)

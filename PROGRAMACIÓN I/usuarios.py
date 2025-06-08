@@ -39,8 +39,8 @@ def modificar_rol_usuario(usuarios):
 
 def datos_usuario(usuario):
     print("" \
-    f"nombre: {usuario["nombre"]}\n" \
-    f"correo: {usuario["correo"]}\n" \
-    f"contrasena: {usuario["contrasena"]}\n" \
-    f"rol: {usuario["rol"]}\n" \
+    f"Nombre: {usuario["nombre"]}\n" \
+    f"Correo: {usuario["correo"]}\n" \
+    f"Contraseña: {usuario["contrasena"]}\n" \
+    f"Rol: {usuario["rol"]}\n" \
     "")

@@ -14,7 +14,7 @@ def activar_modo_ahorro(dispositivos, usuario):
     #simular de datos en memoria
     usuarios =[]
     dispositivos = []
-    automatizaciones =[f"encender luces a las {lucesOn}", f"apagar  luces a las {lucesOff}"]
+    automatizaciones =[f"Encender luces a las {lucesOn}", f"Apagar luces a las {lucesOff}"]
     consultar_automatizaciones(automatizaciones)
     
 def consultar_automatizaciones(automatizaciones):
