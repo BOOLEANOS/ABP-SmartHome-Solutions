@@ -1,6 +1,6 @@
 # test_automatizacion.py
 import unittest
-from automatizacion import Automatizacion
+from POO_smarthome.automatizaciones import Automatizacion
 
 class TestAutomatizacion(unittest.TestCase):
 
