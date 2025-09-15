@@ -24,7 +24,7 @@ class GestionDispositivos:
 
       for d in self.dispositivos:
         if d.nombre.lower() == nombre.lower () and d.usuario_id == usuario_id:
-        print("El nombre ya esta ocupado, porfavor tenes que ingresar otro.")
+        print("El nombre ya esta ocupado, porfavor ingresar otro.")
         return
 
       nuevo_dispositivo = Dispositivo(
@@ -42,14 +42,14 @@ class GestionDispositivos:
       encontrados = [d for d in self.dispositivos if d.usuario_id == usuario_id]
 
       if not encontrados:
-        print("No existe dispositivo registrado amigo.")
+        print("No existen dispositivo registrados .")
         return
       
       for idx, d in enumerate(encontrados, 1):
         print(f"{idx}. {d.nombre} ({d.tipo}) - Estado: {'encendido' if d.estado else 'apagado'}")
 
   def eliminar_dispositivo_por_nombre(self, usuario_id):
-    nombre = input("Ingrese el nombre que queres borrar: ")
+    nombre = input("Ingrese el nombre del dispositivo a eliminar: ")
 
     for d in self.dispositivos:
       if d.nombre.lower() == nombre.lower() and d.usuario_id == usuario_id:
