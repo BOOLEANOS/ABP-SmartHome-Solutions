@@ -88,3 +88,30 @@ def test_modificar_rol_usuario_no_encontrado(mock_input, gestion_con_usuarios, c
     datos_capturados = capsys.readouterr()
     
     assert "Usuario no encontrado." in datos_capturados.out
+
+def test_listar_usuarios_muestra_todos(capsys, gestion_con_usuarios):
+    gestion_con_usuarios.listar_usuarios()
+    datos = capsys.readouterr()
+
+    assert "Ana" in datos.out
+    assert "Pedro" in datos.out
+
+def test_listar_usuarios_vacio(capsys):
+    gestion_vacia = GestionDeUsuarios([])
+    gestion_vacia.listar_usuarios()
+    datos = capsys.readouterr()
+
+    assert "No se encuentran los usuarios registrados" in datos.out
+
+def test_eliminar_usuario_existente(mock_input, gestion_con_usuarios, capsys):
+    gestion_con_usuarios.eliminar_usuario()
+    datos = capsys.readouterr()
+
+    assert len(gestion_con_usuarios.usuarios) == 1
+    assert "Se elimino el usuario de manera existosa" in datos.out
+
+def test_eliminar_usuario_inexistente(mock_input, gestion_con_usuarios, capsys):
+    gestion_con_usuarios.eliminar_usuario()
+    datos = capsys.readouterr()
+
+    assert "No se encuentra el usuario" in datos.out
