@@ -1,3 +1,4 @@
+#Hecho por Euge
 # usuarios.py
 class Usuario:
     def __init__(self, id, nombre, correo, contrasena, rol):
