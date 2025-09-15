@@ -27,3 +27,25 @@ class GestionDispositivos:
       print("El nombre ya esta ocupado, porfavor tenes que ingresar otro.")
       return
 
+  nuevo_dispositivo = Dispositivo(
+    id=len(self.dispositivos) + 1,
+    nombre=nombre,
+    tipo=tipo,
+    estado=True,
+    usuario_id=usuario_id
+  )
+  self.dispositivos.append(nuevo_dispositivo)
+  print(f"El Dispositivo '{nombre}' fue agregado.")
+
+def mostrar_dispositivos_usuario(self, usuario_id):
+  print("\nDispositivo registrtado:")
+  encontrados = [d for d in self.dispositivos if d.usuario_id == usuario_id]
+
+    if not encontrados:
+      print("No existe dispositivo registrado amigo.")
+      return
+      
+    for
+
+
+
