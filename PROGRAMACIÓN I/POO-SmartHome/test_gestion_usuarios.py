@@ -1,3 +1,5 @@
+#hecho por Euge
+
 import pytest
 from usuarios import Usuario
 from gestion_usuarios import GestionDeUsuarios
@@ -88,3 +90,19 @@ def test_modificar_rol_usuario_no_encontrado(mock_input, gestion_con_usuarios, c
     datos_capturados = capsys.readouterr()
     
     assert "Usuario no encontrado." in datos_capturados.out
+
+#Agrego algunas cosas mas
+def test_listar_usuarios_muestra_todos(capsys, gestion_con_usuarios):
+    gestion_con_usuarios.listar_usuarios()
+    datos = capsys.readouterr()
+
+    assert "Ana" in datos.out
+    assert "Pedro" in datos.out
+
+def test_listar_usuarios_vacio(capsys):
+    gestion_vacia = GestionDeUsuarios([])
+    gestion_vacia.listar_usuarios()
+    datos = capsys.readouterr()
+
+    assert "No se encuentran los usuarios registrados" in datos.out
+
