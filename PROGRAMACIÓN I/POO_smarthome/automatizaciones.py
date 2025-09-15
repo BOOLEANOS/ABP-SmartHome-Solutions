@@ -14,3 +14,13 @@ class Automatizacion:
             print(f"Ejecutando automatización: {self._nombre}")
             for accion in self._acciones:
                 accion()
+
+        else:
+            print(f"No se cumple la condición de: {self._nombre}")
+
+    def _evaluar_condicion(self, contexto):
+        
+        if callable(self._condicion):
+            return self._condicion(contexto)
+       
+        return bool(self._condicion)
