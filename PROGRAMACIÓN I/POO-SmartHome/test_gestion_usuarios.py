@@ -106,3 +106,16 @@ def test_listar_usuarios_vacio(capsys):
 
     assert "No se encuentran los usuarios registrados" in datos.out
 
+def test_eliminar_usuario_existente(mock_input, gestion_con_usuarios, capsys):
+    gestion_con_usuarios.eliminar_usuario()
+    datos = capsys.readouterr()
+
+    assert len(gestion_con_usuarios.usuarios) == 1
+    assert "Se elimino el usuario de manera existosa" in datos.out
+
+def test_eliminar_usuario_inexistente(mock_input, gestion_con_usuarios, capsys):
+    gestion_con_usuarios.eliminar_usuario()
+    datos = capsys.readouterr()
+
+    assert "No se encuentra el usuario" in datos.out
+
