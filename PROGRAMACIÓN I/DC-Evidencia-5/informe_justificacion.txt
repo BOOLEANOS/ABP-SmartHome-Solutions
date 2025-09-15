@@ -1,0 +1,59 @@
+Evidencia 5 — Informe
+ Sistema de Automatización de Dispositivos
+ Descripción del sistema:
+ El sistema permite a los usuarios registrar dispositivos y aplicar automatizaciones sobre ellos.
+ Cada dispositivo pertenece a un usuario, y cada usuario puede tener múltiples dispositivos.
+ Cada automatización está asociada a un dispositivo específico, de modo que controla su 
+comportamiento (por ejemplo, activar modo ahorro, encender o apagar, etc.).
+ justificación del diseño de clases
+ Clases principales
+ El sistema está compuesto por tres clases principales que representan los conceptos esenciales del 
+dominio:
+ Usuario: representa a los usuarios del sistema, con sus datos personales y una lista de dispositivos 
+asociados.
+ Dispositivo: representa los dispositivos inteligentes controlados por el sistema, con atributos como 
+nombre, tipo, estado y consumo.
+ Automatizacion: representa rutinas o reglas programadas que actúan sobre dispositivos cuando se 
+cumple una condición.
+ Además, existe una clase Menu que centraliza y organiza las colecciones de usuarios, dispositivos y 
+automatizaciones para facilitar su gestión.
+ Relaciones entre clases
+ Usuario — Dispositivo
+ Tipo de relación: Agregación
+ Cada Usuario posee una lista de Dispositivo asociados.
+Los dispositivos pueden existir sin un usuario, pero se vinculan a uno para representar la propiedad.
+ Principios aplicados:
+ Abstracción: cada clase representa un concepto real (usuarios y dispositivos).
+ Encapsulamiento: se accede a los atributos mediante métodos públicos (agregar_dispositivo, 
+encender, apagar, etc.).
+ Responsabilidad Única (SRP): Usuario gestiona sus datos y dispositivos; Dispositivo gestiona su 
+propio estado y consumo.
+ Automatizacion — Dispositivo
+ Tipo de relación: Asociación
+ Una Automatizacion contiene una lista de acciones que operan sobre instancias de Dispositivo.
+ No posee ni crea dispositivos, solo los utiliza temporalmente para ejecutar acciones.
+ Principios aplicados:
+ Abstracción: representa reglas o rutinas automáticas del sistema.
+ Encapsulamiento: la lógica de evaluación de condiciones está contenida en la clase 
+(_evaluar_condicion).
+ Bajo acoplamiento: Automatizacion depende solo de los métodos públicos de Dispositivo, no de su 
+estructura interna.
+ Usuario — Automatizacion
+ Tipo de relación: Indirecta (a través de Dispositivo)
+ Un Usuario no contiene Automatizacion, pero sus dispositivos pueden ser controlados por 
+automatizaciones.
+ Esto permite que una automatización pueda actuar sobre dispositivos de distintos usuarios sin 
+duplicarse.
+ Conclusión general
+ El diseño propuesto aplica los principios fundamentales de la Programación Orientada a Objetos 
+para construir un sistema modular, reutilizable y extensible.
+Cada clase representa un concepto claro del dominio y encapsula sus propios datos y 
+comportamientos, favoreciendo la cohesión interna.
+ Las relaciones definidas entre ellas promueven un bajo acoplamiento, permitiendo modificar o 
+ampliar la funcionalidad de una clase sin afectar directamente a las demás.
+ La agregación entre Usuario y Dispositivo modela la propiedad sin dependencia de ciclo de vida, 
+mientras que la asociación entre Automatizacion y Dispositivo permite aplicar reglas sobre distintos 
+dispositivos sin duplicar lógica.
+ Este enfoque facilita la evolución futura del sistema (agregar nuevos tipos de dispositivos, más 
+condiciones o acciones en automatizaciones, etc.) manteniendo un código organizado, legible y 
+mantenible.
