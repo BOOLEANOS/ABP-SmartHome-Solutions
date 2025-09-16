@@ -1,5 +1,5 @@
-import pytest
-from Automatizaciones import Automatizacion
+
+from POO_smarthome.Automatizaciones import Automatizacion
 
 def test_ejecutar_condicion_true(capsys):
     accion_llamada = []
