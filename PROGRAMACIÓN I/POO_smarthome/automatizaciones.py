@@ -1,5 +1,3 @@
-# archivo: poo-smarthome/automatizaciones.py
-
 class Automatizacion:
     def __init__(self, id, nombre, condicion, acciones):
         
