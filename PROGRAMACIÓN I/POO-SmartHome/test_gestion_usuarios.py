@@ -36,6 +36,32 @@ def test_registrar_usuario_como_admin(mock_input, capsys):
     assert primer_usuario.rol == "admin"
     assert "registrado con éxito como Administrador" in datos_capturados.out
 
+@patch('builtins.input', side_effect=['a', 'NombreParaPrueba', 'prueba@test.com', 'Password123'])
+def test_registrar_usuario_con_nombre_invalido(mock_input, capsys):
+    gestion_vacia = GestionDeUsuarios([])
+    gestion_vacia.registrar_usuario()
+    captured = capsys.readouterr()
+    
+    assert "Input invalido. El texto debe contener entre 2 y 20 caracteres." in captured.out
+    assert gestion_vacia.usuarios[0].nombre == "NombreParaPrueba"
+
+@patch('builtins.input', side_effect=['NombreParaPrueba', 'prueba@', 'prueba@test.com', 'Password123'])
+def test_registrar_usuario_con_correo_invalido(mock_input, capsys):
+    gestion_vacia = GestionDeUsuarios([])
+    gestion_vacia.registrar_usuario()
+    captured = capsys.readouterr()
+    
+    assert "Formato del correo inválido. Por favor, intentelo nuevamente." in captured.out
+    assert gestion_vacia.usuarios[0].correo == "prueba@test.com"
+
+@patch('builtins.input', side_effect=['NombreParaPrueba', 'prueba@test.com', '123', 'Password123'])
+def test_registrar_usuario_con_contrasena_invalido(mock_input, capsys):
+    gestion_vacia = GestionDeUsuarios([])
+    gestion_vacia.registrar_usuario()
+    captured = capsys.readouterr()
+    
+    assert "Input invalido. El texto debe contener entre 8 y 20 caracteres." in captured.out
+    assert gestion_vacia.usuarios[0].contrasena == "Password123"
 
 @patch('builtins.input', side_effect=['ana@example.com', 'ana123'])
 def test_iniciar_sesion_exitoso(mock_input, gestion_con_usuarios, capsys):
