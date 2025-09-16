@@ -1,6 +1,6 @@
 {
     "python.testing.pytestArgs": [
-        "."
+        "./PROGRAMACIÓN I/POO-SmartHome/tests"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true
