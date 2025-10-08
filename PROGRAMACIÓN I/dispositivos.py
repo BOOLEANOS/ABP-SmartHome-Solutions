@@ -24,7 +24,7 @@ def crear_dispositivo(dispositivos, usuario):
         "nombre": nombre,
         "tipo": tipo,
         "estado": True,
-        "usuario_id": usuario["id"]
+        "usuario": usuario
     }
     dispositivos.append(nuevo_dispositivo)
     print(f" Dispositivo '{nombre}' agregado correctamente.")
