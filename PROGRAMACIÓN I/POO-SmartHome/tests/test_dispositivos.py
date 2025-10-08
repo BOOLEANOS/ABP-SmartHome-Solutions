@@ -39,3 +39,20 @@ def test_setters_dispositivo():
     assert dispositivo.estado_dispositivo == "inactivo"
     assert dispositivo.id_tipo == 3
     assert dispositivo.id_usuario == 6
+
+def test_encender_apagar():
+    dispositivo = Dispositivo(1, "Lámpara", "Oficina", False, 2, 3)
+    
+    dispositivo.encender()
+    assert dispositivo.estado_dispositivo is True
+
+    dispositivo.apagar()
+    assert dispositivo.estado_dispositivo is False
+
+def test_str_dispositivo_encendido():
+    dispositivo = Dispositivo(1, "Ventilador", "Dormitorio", True, 2, 3)
+    assert str(dispositivo) == "Dispositivo(ID: 1, Nombre: Ventilador, Ubicación: Dormitorio, Estado: Encendido)"
+
+def test_str_dispositivo_apagado():
+    dispositivo = Dispositivo(2, "Ventilador", "Dormitorio", False, 2, 3)
+    assert str(dispositivo) == "Dispositivo(ID: 2, Nombre: Ventilador, Ubicación: Dormitorio, Estado: Apagado)"
