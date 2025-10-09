@@ -31,9 +31,6 @@ class Dispositivo:
     def set_ubicacion(self, ubicacion):
         self.__ubicacion = ubicacion
 
-    def set_estado(self, estado):
-        self.__estado = estado
-
     def set_tipo(self, tipo):
         self.__tipo = tipo
         

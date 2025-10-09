@@ -21,19 +21,17 @@ def test_setters_dispositivo():
         id=1,
         nombre="Sensor de temperatura",
         ubicacion="Sala",
-        estado="activo",
+        estado= True,
         tipo=2
     )
     
-    dispositivo.set_nombre() = "Sensor de humedad"
-    dispositivo.set_ubicacion() = "Cocina"
-    dispositivo.set_estado() = "inactivo"
-    dispositivo.set_tipo() = 2
+    dispositivo.set_nombre("Sensor de humedad")
+    dispositivo.set_ubicacion("Cocina") 
+    dispositivo.set_tipo(2)
     
     assert dispositivo.get_nombre() == "Sensor de humedad"
     assert dispositivo.get_ubicacion() == "Cocina"
-    assert dispositivo.get_estado() == "inactivo"
-    assert dispositivo.get_tipo() == "luz"
+    assert dispositivo.get_tipo() == 2
 
 def test_encender_apagar():
     dispositivo = Dispositivo(1, "Lámpara", "Oficina", False, 2)
@@ -46,8 +44,8 @@ def test_encender_apagar():
 
 def test_str_dispositivo_encendido():
     dispositivo = Dispositivo(1, "Ventilador", "Dormitorio", True, 2)
-    assert str(dispositivo) == "Dispositivo(ID: 1, Nombre: Ventilador, Ubicación: Dormitorio, Estado: Encendido)"
+    assert str(dispositivo) == "Dispositivo(ID: 1, Nombre: Ventilador, Ubicación: Dormitorio, Estado: Encendido, Tipo: 2)"
 
 def test_str_dispositivo_apagado():
     dispositivo = Dispositivo(2, "Ventilador", "Dormitorio", False, 2)
-    assert str(dispositivo) == "Dispositivo(ID: 2, Nombre: Ventilador, Ubicación: Dormitorio, Estado: Apagado)"
+    assert str(dispositivo) == "Dispositivo(ID: 2, Nombre: Ventilador, Ubicación: Dormitorio, Estado: Apagado, Tipo: 2)"
