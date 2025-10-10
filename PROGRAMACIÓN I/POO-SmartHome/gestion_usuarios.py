@@ -69,12 +69,12 @@ class GestionDeUsuarios:
             return
 
         for usuario in self.usuarios:
-            print(f"ID: {usuario.id}, Nombre: {usuario.nombre}, Correo: {usuario.correo}, Rol: {usuario.rol}")
+            usuario.mostrar_datos()
 
     def eliminar_usuario(self):
         correo = input("Ingrese el correo del usuario a eliminar: ")
         for usuario in self.usuarios:
-            if usuario.correo == correo:
+            if usuario.get_correo() == correo:
                 self.usuarios.remove(usuario)
                 print("Se elimino el usuario de manera existosa")
                 return
