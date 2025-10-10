@@ -20,8 +20,8 @@ def test_registrar_usuario_como_estandar(mock_input, gestion_con_usuarios, capsy
     
     assert len(gestion_con_usuarios.usuarios) == 3
     nuevo_usuario = gestion_con_usuarios.usuarios[-1]
-    assert nuevo_usuario.nombre == "Carlos"
-    assert nuevo_usuario.rol == "usuario"
+    assert nuevo_usuario.get_nombre() == "Carlos"
+    assert nuevo_usuario.get_rol() == "usuario"
     assert "registrado con éxito como Usuario" in datos_capturados.out
 
 @patch('builtins.input', side_effect=['Admin', 'admin@example.com', 'adminpass'])
@@ -32,8 +32,8 @@ def test_registrar_usuario_como_admin(mock_input, capsys):
     
     assert len(gestion_vacia.usuarios) == 1
     primer_usuario = gestion_vacia.usuarios[0]
-    assert primer_usuario.nombre == "Admin"
-    assert primer_usuario.rol == "admin"
+    assert primer_usuario.get_nombre() == "Admin"
+    assert primer_usuario.get_rol() == "admin"
     assert "registrado con éxito como Administrador" in datos_capturados.out
 
 @patch('builtins.input', side_effect=['a', 'NombreParaPrueba', 'prueba@test.com', 'Password123'])
@@ -43,7 +43,7 @@ def test_registrar_usuario_con_nombre_invalido(mock_input, capsys):
     captured = capsys.readouterr()
     
     assert "Input invalido. El texto debe contener entre 2 y 20 caracteres." in captured.out
-    assert gestion_vacia.usuarios[0].nombre == "NombreParaPrueba"
+    assert gestion_vacia.usuarios[0].get_nombre() == "NombreParaPrueba"
 
 @patch('builtins.input', side_effect=['NombreParaPrueba', 'prueba@', 'prueba@test.com', 'Password123'])
 def test_registrar_usuario_con_correo_invalido(mock_input, capsys):
@@ -52,7 +52,7 @@ def test_registrar_usuario_con_correo_invalido(mock_input, capsys):
     captured = capsys.readouterr()
     
     assert "Formato del correo inválido. Por favor, intentelo nuevamente." in captured.out
-    assert gestion_vacia.usuarios[0].correo == "prueba@test.com"
+    assert gestion_vacia.usuarios[0].get_correo() == "prueba@test.com"
 
 @patch('builtins.input', side_effect=['NombreParaPrueba', 'prueba@test.com', '123', 'Password123'])
 def test_registrar_usuario_con_contrasena_invalido(mock_input, capsys):
@@ -61,7 +61,7 @@ def test_registrar_usuario_con_contrasena_invalido(mock_input, capsys):
     captured = capsys.readouterr()
     
     assert "Input invalido. El texto debe contener entre 8 y 20 caracteres." in captured.out
-    assert gestion_vacia.usuarios[0].contrasena == "Password123"
+    assert gestion_vacia.usuarios[0].get_contrasena() == "Password123"
 
 @patch('builtins.input', side_effect=['ana@example.com', 'ana123'])
 def test_iniciar_sesion_exitoso(mock_input, gestion_con_usuarios, capsys):
@@ -69,8 +69,8 @@ def test_iniciar_sesion_exitoso(mock_input, gestion_con_usuarios, capsys):
     datos_capturados = capsys.readouterr()
     
     assert usuario_logueado is not None
-    assert usuario_logueado.correo == "ana@example.com"
-    assert usuario_logueado.contrasena == "ana123"
+    assert usuario_logueado.get_correo() == "ana@example.com"
+    assert usuario_logueado.get_contrasena() == "ana123"
     assert "Inicio de sesión exitoso." in datos_capturados.out
 
 @patch('builtins.input', side_effect=['ana@example.com', 'incorrecta'])
@@ -96,7 +96,7 @@ def test_modificar_rol_exitoso(mock_input, gestion_con_usuarios, capsys):
     datos_capturados = capsys.readouterr()
     
     usuario_modificado = gestion_con_usuarios.usuarios[0]
-    assert usuario_modificado.rol == "estandar"
+    assert usuario_modificado.get_rol() == "estandar"
     assert "Rol actualizado a estandar." in datos_capturados.out
 
 @patch('builtins.input', side_effect=['pedro@example.com', 'invalido'])
@@ -105,7 +105,7 @@ def test_modificar_rol_invalido(mock_input, gestion_con_usuarios, capsys):
     datos_capturados = capsys.readouterr()
     
     usuario_no_modificado = gestion_con_usuarios.usuarios[1]
-    assert usuario_no_modificado.rol == "estandar"
+    assert usuario_no_modificado.get_rol() == "estandar"
     assert "Rol inválido." in datos_capturados.out
 
 @patch('builtins.input', side_effect=['inexistente@example.com', 'admin'])

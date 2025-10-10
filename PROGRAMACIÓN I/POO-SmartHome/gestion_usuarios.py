@@ -44,7 +44,7 @@ class GestionDeUsuarios:
         correo = input("Correo: ")
         contrasena = input("Contraseña: ")
         for usuario in self.usuarios:
-            if usuario.correo == correo and usuario.contrasena == contrasena:
+            if usuario.get_correo() == correo and usuario.get_contrasena() == contrasena:
                 print("Inicio de sesión exitoso.")
                 return usuario
         print("Credenciales incorrectas.")
@@ -53,10 +53,10 @@ class GestionDeUsuarios:
     def modificar_rol_usuario(self):
         correo = input("Correo del usuario a modificar: ")
         for usuario in self.usuarios:
-            if usuario.correo == correo:
+            if usuario.get_correo() == correo:
                 nuevo_rol = input("Nuevo rol (admin / estandar): ").lower()
                 if nuevo_rol in ["admin", "estandar"]:
-                    usuario.rol = nuevo_rol
+                    usuario.set_rol(nuevo_rol)
                     print(f"Rol actualizado a {nuevo_rol}.")
                 else:
                     print("Rol inválido.")
