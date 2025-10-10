@@ -62,3 +62,20 @@ class GestionDeUsuarios:
                     print("Rol inválido.")
                 return
         print("Usuario no encontrado.")
+        
+    def listar_usuarios(self):
+        if not self.usuarios:
+            print("No se encuentran los usuarios registrados")
+            return
+
+        for usuario in self.usuarios:
+            print(f"ID: {usuario.id}, Nombre: {usuario.nombre}, Correo: {usuario.correo}, Rol: {usuario.rol}")
+
+    def eliminar_usuario(self):
+        correo = input("Ingrese el correo del usuario a eliminar: ")
+        for usuario in self.usuarios:
+            if usuario.correo == correo:
+                self.usuarios.remove(usuario)
+                print("Se elimino el usuario de manera existosa")
+                return
+        print("No se encuentra el usuario")
