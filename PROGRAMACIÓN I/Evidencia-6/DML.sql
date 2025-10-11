@@ -72,9 +72,9 @@ SELECT * FROM Condicion_Automatizacion;
 SELECT * FROM Automatizacion;
 SELECT * FROM Dispositivo_Automatizacion;
 
---Aca es donde aplicamos lo nuevo de la evidencia 6 que es las consultas multitablas y las subconsultas que pide el profe 
+-- Aca es donde aplicamos lo nuevo de la evidencia 6 que es las consultas multitablas y las subconsultas que pide el profe 
 
---este permite conocer quien es el dueño del dispositivo que tiene asocidado
+-- este permite conocer quien es el dueño del dispositivo que tiene asocidado
 SELECT d.nombre_dispositivo, u.nombre_usuario, t.tipo_dispositivo
 FROM Dispositivo d
 JOIN Usuario u ON d.id_usuario = u.id_usuario
@@ -100,9 +100,9 @@ JOIN Dispositivo_Automatizacion da ON d.id_dispositivo = da.id_dispositivo
 JOIN Automatizacion au ON da.id_automatizacion = au.id_automatizacion
 JOIN Condicion_Automatizacion c ON au.id_condicion = c.id_condicion;
 
---aca van las subconsultas 
+-- aca van las subconsultas 
 
---en esta se muestran los dispositivos que no tienen una automatizacion asignada
+-- en esta se muestran los dispositivos que no tienen una automatizacion asignada
 SELECT nombre_dispositivo
 FROM Dispositivo
 WHERE id_dispositivo NOT IN (
