@@ -1,7 +1,5 @@
 from gestion_usuarios import GestionDeUsuarios
-from usuarios import Usuario
 from gestion_dispositivos import GestionDispositivos
-#from automatizaciones import activar_modo_ahorro, configurar_modo_ahorro, consultar_automatizaciones
 
 
 def mostrar_menu_principal():
@@ -14,16 +12,15 @@ def mostrar_menu_principal():
 def mostrar_menu_usuario_admin(nombre, rol):
     print(f"\nBienvenido/a {nombre} ({rol})!")
     print("1. Gestionar dispositivos")
-    print("2. Activar Modo Ahorro de Energía")
+    print("2. Cambiar de rol de un usuario")
     print("3. Cerrar sesión")
     return input("Seleccione una opción: ")
 
 def mostrar_menu_usuario_estandar(nombre):
     print(f"\nBienvenido/a {nombre}")
     print("1. Consultar los datos personales")
-    print("2. Menu modo ahorro de energía")
-    print("3. Consultar dispositivos")
-    print("4. Cerrar sesión")
+    print("2. Consultar dispositivos")
+    print("3. Cerrar sesión")
     return input("Seleccione una opción: ")
 
 def mostrar_menu_dispositivos():
@@ -41,35 +38,10 @@ def mostrar_menu_cambio_estado_dispositivo():
     print("2. Desactivar dispositivo")
     return input("Seleccione una opción: ")
 
-def mostrar_menu_automatizaciones():
-    print("\n--- Gestión de modo ahorro de energía ---")
-    print("1. Activar automatización")
-    print("2. Configurar automatización")
-    print("3. Volver al menú anterior")
-    return input("Seleccione una opción: ")
-
 gestor_usuario = GestionDeUsuarios([])
 gestor_dispositivos = GestionDispositivos([])
 
-def gestionar_automatizacion(dispositivos, usuario):
-    opcion = ""
-    while opcion != "3":
-        opcion = mostrar_menu_automatizaciones()
-        match opcion:
-            case "1":
-                print("Opción inválida. Intente nuevamente.")
-                #activar_modo_ahorro(dispositivos, usuario)
-            case "2":
-                print("Configurando modo ahorro de energía...")
-                horaOn = input("Ingrese la hora para encender las luces: ")
-                horaOff = input("Ingrese la hora para apagar las luces: ")
-                #configurar_modo_ahorro(horaOn, horaOff)
-            case "3":
-                print("Volviendo al menú anterior...")
-            case _:
-                print("Opción inválida. Intente nuevamente.")
-
-def gestionar_dispositivos(dispositivos, usuario):
+def gestionar_dispositivos():
     opcion = ""
     while opcion != "5":
         opcion = mostrar_menu_dispositivos()
@@ -81,13 +53,13 @@ def gestionar_dispositivos(dispositivos, usuario):
             case "3":
                 gestor_dispositivos.eliminar_dispositivo_por_nombre()
             case "4":
-                activar_desactivar_dispositivo(dispositivos)
+                activar_desactivar_dispositivo()
             case "5":
                 print("Volviendo al menú anterior...")
             case _:
                 print("Opción inválida. Intente nuevamente.")
     
-def activar_desactivar_dispositivo(dispositivos):
+def activar_desactivar_dispositivo():
     opcion = ""
     while opcion != "1" and opcion != "2":
         opcion = mostrar_menu_cambio_estado_dispositivo()
@@ -100,7 +72,7 @@ def activar_desactivar_dispositivo(dispositivos):
                 print("Opción inválida. Intente nuevamente.")
 
     
-def menu_usuario_admin(dispositivos, usuario):
+def menu_usuario_admin(usuario):
     global autenticado
     autenticado = usuario
     sesion_activa = True
@@ -108,10 +80,9 @@ def menu_usuario_admin(dispositivos, usuario):
     while sesion_activa:
         opcion = mostrar_menu_usuario_admin(usuario.get_nombre(), usuario.get_rol())
         if opcion == "1":
-            gestionar_dispositivos(dispositivos, usuario)
+            gestionar_dispositivos()
         elif opcion == "2":
-            print("Opción inválida. Intente nuevamente.")
-            #activar_modo_ahorro(dispositivos, usuario)
+            gestor_usuario.modificar_rol_usuario()
         elif opcion == "3":
             autenticado = None
             print("Sesión cerrada.")
@@ -119,7 +90,7 @@ def menu_usuario_admin(dispositivos, usuario):
         else:
             print("Opción inválida.")
     
-def menu_usuario_estandar(dispositivos, usuario):
+def menu_usuario_estandar(usuario):
     global autenticado
     autenticado = usuario
     sesion_activa = True
@@ -130,18 +101,16 @@ def menu_usuario_estandar(dispositivos, usuario):
             print("Consultando los datos personales...\n")
             usuario.mostrar_datos()
         elif opcion == "2":
-            gestionar_automatizacion(dispositivos, usuario)
-        elif opcion == "3":
             print("Consultando dispositivos...\n")
             gestor_dispositivos.mostrar_dispositivos()
-        elif opcion == "4":
+        elif opcion == "3":
             autenticado = None
             sesion_activa = False
             print("Sesión cerrada.")
         else:
             print("Opción inválida.")
 
-def menu_principal(dispositivos, usuarios):
+def menu_principal():
     app_activa = True
 
     while app_activa:
@@ -150,36 +119,15 @@ def menu_principal(dispositivos, usuarios):
         if opcion == "1":
             gestor_usuario.registrar_usuario()
         elif opcion == "2":
-            usuario: Usuario = gestor_usuario.iniciar_sesion()
+            usuario = gestor_usuario.iniciar_sesion()
             if usuario != None:
                 if usuario.get_rol() == "admin":
-                    menu_usuario_admin(dispositivos, usuario)
+                    menu_usuario_admin(usuario)
                 else:
-                    menu_usuario_estandar(dispositivos, usuario)
+                    menu_usuario_estandar(usuario)
         elif opcion == "3":
             print("¡Hasta luego!")
             app_activa = False
-        else:
-            print("Opción inválida.")
-            
-def menu_admin(usuarios, dispositivos, automatizaciones, admin):
-    while True:
-        print("\n--- MENÚ ADMINISTRADOR ---")
-        print("1. Consultar automatizaciones activas") #completa lore
-        print("2. Gestionar dispositivos (no implementado aún)")
-        print("3. Modificar rol de un usuario")
-        print("4. Salir")
-
-        opcion = input("Seleccione una opción: ")
-        if opcion == "1":
-            print("Opción inválida. Intente nuevamente.")
-            #consultar_automatizaciones(automatizaciones) #completa lore
-        elif opcion == "2":
-            print("Función de gestión de dispositivos aún no disponible.")
-        elif opcion == "3":
-            gestor_usuario.modificar_rol_usuario()
-        elif opcion == "4":
-            break
         else:
             print("Opción inválida.")
 
