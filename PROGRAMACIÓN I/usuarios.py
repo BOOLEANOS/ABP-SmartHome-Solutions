@@ -36,3 +36,11 @@ def modificar_rol_usuario(usuarios):
                 print("Rol inválido.")
             return
     print("Usuario no encontrado.")
+
+def datos_usuario(usuario):
+    print("" \
+    f"Nombre: {usuario["nombre"]}\n" \
+    f"Correo: {usuario["correo"]}\n" \
+    f"Contraseña: {usuario["contrasena"]}\n" \
+    f"Rol: {usuario["rol"]}\n" \
+    "")
