@@ -158,20 +158,45 @@ def menu_principal(dispositivos, usuarios):
 def menu_admin(usuarios, dispositivos, automatizaciones, admin):
     while True:
         print("\n--- MENÚ ADMINISTRADOR ---")
-        print("1. Consultar automatizaciones activas") #completa lore
-        print("2. Gestionar dispositivos (no implementado aún)")
-        print("3. Modificar rol de un usuario")
+        print("1. Encender un dispositivo")
+        print("2. Apagar un dispositivo")
+        print("3. Ver estado de los dispositivos")
         print("4. Salir")
+        # bucle principal
+        while True: 
+            mostrar = menu_admin()
+            opcion= input("Elige una opcion:")
 
-        opcion = input("Seleccione una opción: ")
-        if opcion == "1":
-            consultar_automatizaciones(automatizaciones) #completa lore
-        elif opcion == "2":
-            print("Función de gestión de dispositivos aún no disponible.")
-        elif opcion == "3":
-            modificar_rol_usuario(usuarios)
-        elif opcion == "4":
-            break
-        else:
-            print("Opción inválida.")
+    if opcion == "1":
+            print ("/n dispositivos disponibles para encender:")
+            for nombre  in dispositivos:
+                if not dispositivos[nombre]:
+                    print(f"-{nombre}")
+                nombre = input ("escribe el nombre exacto del dispositivo a encender:")
+            if nombre in dispositivos  and not dispositivo [nombre]:
+                        dispositivos [nombre] = True 
+                        print (f"{nombre}encendido.")
+            else: 
+                print("nombre invalido o ya esta encendido.")
+    elif opcion == "2":
+            print("/n dispositivos disponibles para apagar:")
+            for nombre in dispositivos:
+             if dispositivos [nombre]:
+                print(f"-{nombre}")
+                nombre = input ("escribe elnombre exacto del dispositivo a apagar:")
+                if nombre in dispositivos and dispositivos[nombre]:
+                     dispositivos[nombre]= False
+                     print (f"{nombre} apagado.")
+                else:
+                     print("nombre invalido oya esta apagado.")
+                     
+    elif opcion == "3":
+            mostrar_estado()
+
+    elif opcion == "4":
+      print("saliendo del sistema...")
+      
+      
+    else:
+      print("Opción no valida.intenta nuevamente.")
 
