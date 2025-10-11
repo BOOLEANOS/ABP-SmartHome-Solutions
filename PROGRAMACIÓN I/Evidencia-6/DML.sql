@@ -101,3 +101,29 @@ JOIN Automatizacion au ON da.id_automatizacion = au.id_automatizacion
 JOIN Condicion_Automatizacion c ON au.id_condicion = c.id_condicion;
 
 --aca van las subconsultas 
+
+--en esta se muestran los dispositivos que no tienen una automatizacion asignada
+SELECT nombre_dispositivo
+FROM Dispositivo
+WHERE id_dispositivo NOT IN (
+    SELECT DISTINCT id_dispositivo
+    FROM Dispositivo_Automatizacion
+);
+
+-- aca por ejemplo si alguna automatizacion se activa con la condificon que pusimos antes 'al anochecer'
+SELECT nombre_automatizacion
+FROM Automatizacion
+WHERE id_condicion = (
+    SELECT id_condicion
+    FROM Condicion_Automatizacion
+    WHERE tipo_condicion = 'al anochecer'
+);
+
+-- y en este los dispositivos que tienen las automatizaciones activas
+SELECT nombre_dispositivo
+FROM Dispositivo
+WHERE id_dispositivo IN (
+    SELECT id_dispositivo
+    FROM Automatizacion
+    WHERE estado_automatizacion = 'activa'
+);
