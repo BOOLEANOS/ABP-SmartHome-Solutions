@@ -82,7 +82,10 @@ def menu_usuario_admin(usuario):
         if opcion == "1":
             gestionar_dispositivos()
         elif opcion == "2":
-            gestor_usuario.modificar_rol_usuario()
+            usuario_modificado = gestor_usuario.modificar_rol_usuario()
+            if (usuario_modificado == usuario):
+                print("Se actualizo el rol del usuario actual por lo tanto se cierra la sesión.")
+                sesion_activa = False
         elif opcion == "3":
             autenticado = None
             print("Sesión cerrada.")

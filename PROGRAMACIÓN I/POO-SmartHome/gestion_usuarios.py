@@ -58,9 +58,10 @@ class GestionDeUsuarios:
                 if nuevo_rol in ["admin", "estandar"]:
                     usuario.set_rol(nuevo_rol)
                     print(f"Rol actualizado a {nuevo_rol}.")
+                    return usuario
                 else:
                     print("Rol inválido.")
-                return
+                return None
         print("Usuario no encontrado.")
         
     def listar_usuarios(self):
