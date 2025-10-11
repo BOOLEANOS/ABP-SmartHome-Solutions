@@ -1,6 +1,6 @@
 from gestion_usuarios import GestionDeUsuarios
 from usuarios import Usuario
-#from dispositivos import Dispositivo
+from gestion_dispositivos import GestionDispositivos
 #from automatizaciones import activar_modo_ahorro, configurar_modo_ahorro, consultar_automatizaciones
 
 
@@ -48,7 +48,8 @@ def mostrar_menu_automatizaciones():
     print("3. Volver al menú anterior")
     return input("Seleccione una opción: ")
 
-gestor_usuario: GestionDeUsuarios = GestionDeUsuarios([])
+gestor_usuario = GestionDeUsuarios([])
+gestor_dispositivos = GestionDispositivos([])
 
 def gestionar_automatizacion(dispositivos, usuario):
     opcion = ""
@@ -74,14 +75,11 @@ def gestionar_dispositivos(dispositivos, usuario):
         opcion = mostrar_menu_dispositivos()
         match opcion:
             case "1":
-                print("Opción inválida. Intente nuevamente.")
-                #mostrar_dispositivos_usuario(dispositivos, usuario)
+                gestor_dispositivos.mostrar_dispositivos()
             case "2":
-                print("Opción inválida. Intente nuevamente.")
-                #crear_dispositivo(dispositivos, usuario)
+                gestor_dispositivos.crear_dispositivo()
             case "3":
-                print("Opción inválida. Intente nuevamente.")
-                #eliminar_dispositivo_por_nombre(dispositivos, usuario)
+                gestor_dispositivos.eliminar_dispositivo_por_nombre()
             case "4":
                 activar_desactivar_dispositivo(dispositivos)
             case "5":
@@ -95,11 +93,9 @@ def activar_desactivar_dispositivo(dispositivos):
         opcion = mostrar_menu_cambio_estado_dispositivo()
         match opcion:
             case "1":
-                print("Opción inválida. Intente nuevamente.")
-                #cambiar_estado_dispositivo(dispositivos, True)
+                gestor_dispositivos.cambiar_estado_dispositivo(True)
             case "2":
-                print("Opción inválida. Intente nuevamente.")
-                #cambiar_estado_dispositivo(dispositivos, False)
+                gestor_dispositivos.cambiar_estado_dispositivo(False)
             case _:
                 print("Opción inválida. Intente nuevamente.")
 
@@ -137,7 +133,7 @@ def menu_usuario_estandar(dispositivos, usuario):
             gestionar_automatizacion(dispositivos, usuario)
         elif opcion == "3":
             print("Consultando dispositivos...\n")
-            #mostrar_dispositivos_usuario(dispositivos, usuario)
+            gestor_dispositivos.mostrar_dispositivos()
         elif opcion == "4":
             autenticado = None
             sesion_activa = False
