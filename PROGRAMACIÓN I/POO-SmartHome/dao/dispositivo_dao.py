@@ -108,7 +108,7 @@ class DispositivoDAO:
             cursor.execute("DELETE FROM dispositivos WHERE id = %s", (id_dispositivo,))
             conexion.commit()
             if cursor.rowcount > 0:
-                print("🗑️ Dispositivo eliminado correctamente.")
+                print("Dispositivo eliminado correctamente.")
             else:
                 print("No se encontró el dispositivo.")
         except Error as e:
