@@ -22,6 +22,12 @@ Base de Datos: MySQL
 Entorno: Consola
 Gestión de código: GitHub
 
+Ejecución del Programa:
+1. Clonar el repositorio: https://github.com/BOOLEANOS/ABP-SmartHome-Solutions.git
+2. Navegar al directorio principal: cd POO-SmartHome
+3. Ejecutar el programa principal: python main.py
+4. Seguir las instrucciones del menú para registrarse o iniciar sesión.
+
 Autores:
 Lorena Paola Pereyra,
 Nancy Maribel Morales,
