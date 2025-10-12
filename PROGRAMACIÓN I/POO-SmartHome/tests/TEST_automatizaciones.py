@@ -1,5 +1,5 @@
 
-from automatizaciones import Automatizacion
+from dominio.automatizaciones import Automatizacion
 
 def test_ejecutar_condicion_true(capsys):
     accion_llamada = []

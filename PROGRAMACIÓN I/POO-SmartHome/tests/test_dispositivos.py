@@ -1,5 +1,5 @@
 import pytest
-from dispositivos import Dispositivo
+from dominio.dispositivos import Dispositivo
 
 def test_constructor_dispositivo():
     dispositivo = Dispositivo(
