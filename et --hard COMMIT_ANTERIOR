@@ -1,0 +1,191 @@
+[33m1bb83a0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #29 from BOOLEANOS/lorena-pereyra
+[33m4c2d340[m correccion
+[33mdd7b020[m correcion
+[33m52a89c2[m Merge pull request #20 from BOOLEANOS/lorena-pereyra
+[33mce77165[m correccion justificacion
+[33mfa8709a[m actualizacion de mi rama
+[33mc55a815[m Merge branch 'main' into lorena-pereyra
+[33m903dee4[m agregar
+[33mdf72b31[m Add user tests for user attributes and display functionality
+[33m591d511[m usuario_dao.py
+[33m0e7703e[m Agregar clase Automatizacion para gestionar acciones automatizadas
+[33m35a4915[m reestructuracion de carpeta para el proyecto
+[33m6c0dccb[m[33m ([m[1;31morigin/Nancy-Morales[m[33m)[m Delete PROGRAMACIÓN I/POO-SmartHome/__init__.py
+[33m6727749[m reestructuracion de Automatizacion, Dispositivo y Usuario. Se agregó la conexión a la base de datos y se actualizó el DAO de Dispositivo.
+[33m988e72e[m actualizacion hacia mi rama
+[33m10c0f80[m[33m ([m[1;31morigin/EugeniaBarrios/Ev6[m[33m)[m Se corrigio error al modificar rol del usuario
+[33m2c7d222[m Se reestructuro el menu en base al enunciado y se quitaron cosas innecesarias
+[33m4b0261d[m Se agrego GestionDispositivos
+[33mefb5b49[m Se arreglaron test que fallaban
+[33mee3f0f8[m Merge branch 'main' into EugeniaBarrios/Ev6
+[33mcb883ee[m Se agrego main en POO y gestion de usuarios
+[33mc1e42b7[m gestion_usuarios.py
+[33ma8c054a[m Merge pull request #26 from BOOLEANOS/Nancy-Morales
+[33m73990ff[m Corrigir la importación de la clase Automatizacion en el archivo de pruebas ya que unifique todoa una sola carpeta
+[33me119dba[m reorganizacion de test a una sola carpeta
+[33m8cdded3[m Agregar __pycache__ al .gitignore
+[33m9a08904[m Merge pull request #25 from BOOLEANOS/main
+[33me97944d[m Merge pull request #24 from BOOLEANOS/Nancy-Morales
+[33mc2dd754[m pruebas unitarias solucionadas
+[33mad8074a[m Eliminar el método set_estado y corregir pruebas unitarias en la clase Dispositivo
+[33mdad9481[m Merge pull request #22 from BOOLEANOS/main
+[33m9454434[m Merge branch 'Nancy-Morales' into main
+[33mbbc5b35[m Implementar getters y setters en la clase Dispositivo y actualizar pruebas unitarias
+[33me2bdb3a[m .gitignore
+[33m1facb13[m gitignore
+[33m6de419c[m Correccion de Encapsulamiento e instancia de objeto en atributos FK
+[33m2dc8320[m Merge branch 'Nancy-Morales' of https://github.com/BOOLEANOS/ABP-SmartHome-Solutions into Nancy-Morales
+[33m0ba2289[m Correccion de Encapsulamiento e instancia de objeto en atributos FK
+[33m72173a5[m actualizacion
+[33m02c28c5[m restaurar
+[33m86cf201[m Se Agrego en formato README.md
+[33m3bebd18[m Update README.md
+[33mb394849[m Informe_justificación
+[33mcc56629[m Merge pull request #19 from BOOLEANOS/Nancy-Morales
+[33m1980d9c[m Update test_dispositivos.py
+[33mf3e2acb[m Diagrama de Clases
+[33m6abe4cc[m pruebas logradas
+[33m23ec1f7[m crear archivo
+[33m5f8027f[m crear archivo
+[33mb33cada[m ejecutar pruebaas
+[33m8a17a6f[m testear
+[33m7aeea49[m CREAR CLASE
+[33mfb2614e[m CREAR TEST
+[33mde4525c[m crear archivo
+[33m1f8830f[m eliminar archivos innecesarios
+[33m63f6ebb[m corregir
+[33m973c1df[m agregar
+[33m51a14c8[m prueba
+[33m57d91e0[m agrege  archivo
+[33m94facfb[m corregir
+[33m493c7e2[m borrar
+[33m6e12f5f[m Merge from BOOLEANOS/Nancy-Morales pytest dispositivos
+[33m5dd7c0e[m remove unnecessary files - pytest
+[33m3f10817[m Merge branch 'EugeniaBarrios/poo'
+[33mc894f71[m[33m ([m[1;31morigin/EugeniaBarrios/poo[m[33m)[m Se agregaron validaciones para registrar usuario junto con su test
+[33m44329dd[m Config Path pytest folder
+[33m83a603e[m agregar
+[33m02aeb5c[m agregar info
+[33mb029e2a[m pytest
+[33m058a7ed[m agregar informe
+[33md05d3f1[m Merge pull request #17 from BOOLEANOS/Nancy-Morales
+[33m2302368[m Merge branch 'main' into Nancy-Morales
+[33m9d271c3[m correccion
+[33ma88c809[m cambiar  archivo
+[33md7381b9[m actualización
+[33m40cb76c[m Delete PROGRAMACIÓN I/POO-SmartHome/test_dispositivos.py
+[33mc2cfb72[m agregar informe
+[33mc9bb38a[m correjir
+[33m2ece8fe[m agregar test
+[33m297978c[m se movieron las evidencias para mayor organizacón
+[33m03b943e[m eliminar: se eliminaron archivos DDL.sql, DML.sql y README.md
+[33m25c7d60[m corregir nombre
+[33me422085[m eliminar: se eliminó el documento de texto innecesario
+[33m3cba5d0[m refactor: mejora en la estructura de la clase Dispositivo
+[33med5951c[m actualizacion
+[33m106e31c[m agregar codigo
+[33mecfdf7e[m se agrego clase Dispositivo y pruebas unitarias
+[33mc863cd6[m Merge pull request #15 from BOOLEANOS/Nancy-Morales
+[33ma7c351b[m test de la clase dispositivo
+[33ma29df1d[m clase automatizacion
+[33meb0e6fb[m agregar test
+[33m6c5a1e6[m creacion de clase dispositivos.py
+[33m8b93ca4[m Merge pull request #14 from BOOLEANOS/Nancy-Morales
+[33mb3839b2[m Merge pull request #13 from BOOLEANOS/main
+[33mb534f11[m corregir
+[33m40dc24f[m test_gestion_usuarios.py
+[33m98b1408[m Merge branches 'lorena-pereyra' and 'lorena-pereyra' of https://github.com/BOOLEANOS/ABP-SmartHome-Solutions into lorena-pereyra
+[33m85d222e[m agregar codigo
+[33mc2987d2[m borre carpeta
+[33m8427cdf[m agregar informe
+[33mb1ce873[m informe
+[33m96a98d5[m actualización
+[33me895c1d[m Merge branch 'main' of https://github.com/BOOLEANOS/ABP-SmartHome-Solutions
+[33m2818f9d[m actualizacion
+[33m207a31e[m correccion
+[33mdd2e0e1[m Merge pull request #12 from BOOLEANOS/main
+[33m2834d8b[m tests
+[33m3ac5683[m Merge pull request #11 from BOOLEANOS/Nancy-Morales
+[33me459e50[m Espacio creado para el diagrama de clases
+[33m78cb2bd[m Merge pull request #10 from BOOLEANOS/main
+[33m99da3b5[m Delete DC-Evidencia-5/Nuevo documento de texto.txt
+[33m33ac464[m Espacio creado para diagrama de clases
+[33m509ad5b[m clases automatizacion
+[33mdd7b570[m Se creo clase gestion usuarios y test
+[33ma77dd1b[m Se creo clase usuario junto con su test
+[33mbb43b07[m Merge branch 'main' into EugeniaBarrios/poo
+[33med44e9e[m Se creo carpeta POO-SmartHome
+[33ma353685[m Agregamos pyc en gitignore
+[33m684191e[m borre carpeta
+[33mc29ba52[m nueva carpeta poo-smarthome
+[33m648493a[m Merge pull request #9 from BOOLEANOS/Nancy-Morales
+[33mef3c2c0[m Update README.md
+[33mf1c19b1[m actualizacion
+[33m7f1714a[m Delete BASE DE DATOS/modelo relacional.drawio
+[33m4efb5d5[m Delete BASE DE DATOS/Diagrama ev 3.drawio
+[33m79dc474[m actualizacion del merge
+[33m01961e8[m Diagrama y modelo relacional evidencia 3
+[33m59dff40[m Delete BASE DE DATOS/Hoja2 BD.drawio
+[33m675d21c[m Merge pull request #6 from BOOLEANOS/main
+[33m208e41d[m Imagen-diagrama-ev-2
+[33md258a86[m Delete BASE DE DATOS/Diagrama ev 2.drawio
+[33me5ecdb1[m Evidencia-2-Diagrama
+[33m6e07adc[m Merge pull request #5 from BOOLEANOS/Nancy-Morales
+[33m3f2386c[m Delete BASE DE DATOS/CORRECCIONES HECHAS AL MODELO ENTIDAD RELACION.docx
+[33m7085e6c[m README.md
+[33mcd79376[m README.md
+[33mba0dbff[m DML.sql
+[33m6ac74c7[m Merge pull request #4 from BOOLEANOS/Nancy-Morales
+[33m670af86[m Delete Diagrama ev 3.drawio
+[33m1b7d86d[m DDL.sql
+[33mf859324[m Delete modelo relacional.drawio
+[33m22c8c22[m Merge pull request #3 from BOOLEANOS/Nancy-Morales
+[33m906c50c[m creacion_estructura_carpeta_DB
+[33mebd8271[m Merge pull request #2 from BOOLEANOS/main
+[33m4b02049[m Delete BD-Evidencia-5/DML.sql.txt
+[33m003da60[m Delete BD-Evidencia-5/DDL.sql.txt
+[33made4125[m Merge pull request #1 from BOOLEANOS/Nancy-Morales
+[33m0d34869[m creacion_estructura-carpeta_DB
+[33md4a30b6[m modificaciones hechas al DER
+[33m73aadbb[m Agregamos mensaje de cambio de estado de dispositivo
+[33m747ce94[m Renombrar variables para seguir standard
+[33mb7e218a[m Agregamos la opcion de activar/desactivar dispositivo
+[33m0b9aa29[m Modelo Relacional Evidencia 3
+[33mf8ea04c[m DER
+[33m88c7940[m Modelo Relacional evidencia 3
+[33m1126154[m DER
+[33m6906bad[m Quitamos la realcion de dispositivo con user
+[33m01dc1b0[m mejoras correccion
+[33mc143158[m cambios confirmados
+[33m354d383[m[33m ([m[1;31morigin/menuprincipal[m[33m)[m Mejoras de presentacion
+[33m9c17340[m Implementamos menu automatizacion
+[33me20bd93[m Agregamos menu automatizacion
+[33m74d4d9e[m Agregamos consular datos del usuario y dispositivos
+[33ma148679[m Agregamos la opcion de cerrar sesion en el menu estandar
+[33md975c1a[m Agregamos menu_usuario_estandar
+[33ma942e00[m Renombrar menu usuario
+[33mac090fb[m agrege mejora de automatizacion
+[33m5e81a70[m corregi errores en prueba.py
+[33m52dd15f[m Merge branch 'main' of https://github.com/BOOLEANOS/ABP-SmartHome-Solutions
+[33m1a15f8d[m Merge branch 'main' of https://github.com/BOOLEANOS/ABP-SmartHome-Solutions
+[33ma6d61b9[m agrege un print
+[33mdcc0b4f[m agregue rol usuario
+[33m8614fab[m menu administrador
+[33m1589112[m test
+[33m5796ad8[m refactorizacion
+[33m06fb759[m cambio
+[33m35697bc[m Se agrego rol a los usuarios
+[33m0f07434[m[33m ([m[1;31morigin/actividades-de-la-evidencia[m[33m)[m Agregamos diagramas de base de datos
+[33m2e0ac4f[m Delete BASE DE DATOS/Nuevo documento de texto.txt
+[33m51a067e[m Delete PROGRAMACIÓN I/Nuevo documento de texto.txt
+[33m6186240[m Add files via upload
+[33m49028f9[m Actualizar Diagrama sin título.drawio
+[33md2c6ccb[m Actualizar Diagrama sin título.drawio
+[33m2648000[m EntidadesBasicas.drawio
+[33mbb4d360[m DER SmartHome Solutions.drawio
+[33mfc9b5c8[m Delete BASE DE DATOS/Diagrama sin título.drawio
+[33m09839b3[m DER SmartHome Solutions.drawio
+[33m6c5ba2e[m Add files via upload
+[33m02f0b5a[m Add files via upload
+[33m251350c[m Add files via upload
+[33m64a68dc[m Initial commit
