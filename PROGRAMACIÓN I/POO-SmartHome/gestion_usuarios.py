@@ -1,6 +1,6 @@
 # gestion_usuarios.py
 import re
-from usuarios import Usuario
+from dominio.usuarios import Usuario
 
 class GestionDeUsuarios:
     def __init__(self, usuarios):

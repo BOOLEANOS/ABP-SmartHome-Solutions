@@ -1,6 +1,6 @@
 # test_mymodule.py
 import pytest
-from usuarios import Usuario
+from dominio.usuarios import Usuario
 
 def test_usuario_init():
     usuario = Usuario(id=1, nombre="Test User", correo="test@example.com", contrasena="password123", rol="usuario")
