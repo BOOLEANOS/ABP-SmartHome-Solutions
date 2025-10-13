@@ -20,3 +20,4 @@ Haz clic en el botón verde "Run" ubicado en la parte superior.
 La ventana "Output" (Salida), que se encuentra debajo del editor, mostrará los resultados de todas las consultas SELECT que están al final del script. Se puede ver las tablas completas y los resultados de las consultas multitabla y subconsultas.
 
 
+
