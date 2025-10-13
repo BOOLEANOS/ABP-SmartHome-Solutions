@@ -1,0 +1,25 @@
+Justificación diseño de clases
+El diseño de clases propuesto se fundamenta en la modularidad y la claridad estructural, aplicando
+principios fundamentales de software para asegurar la mantenibilidad y la escalabilidad del
+sistema de automatización.
+Se implementan cuatro clases principales, donde cada una adhiere estrictamente al Principio de
+Responsabilidad Única (SRP).
+La clase Usuario encapsula la identidad y la gestión de la propiedad de recursos.
+La clase Dispositivo se enfoca exclusivamente en la administración de su estado operativo y
+métricas de consumo.
+La clase Automatización se centra en ejecución de reglas, que se programan para que los
+dispositivos accionen automáticamente cuando se cumplen ciertas condiciones.
+Existe una clase Menú que centraliza, organiza las colecciones de usuarios, los dispositivos y las
+automatizaciones para facilitar su gestión proporcionando una interfaz unificada y simplificada
+para regular las interacciones entre los componentes principales del sistema.
+Las relaciones entre las clases están definidas mediante asociaciones que modelan la estructura
+del sistema. La vinculación entre Usuario y Dispositivo se establece como una relación de
+agregación o propiedad. Es crucial que la clase Automatización solo mantenga una referencia a los
+dispositivos sobre los que opera, aplicando el principio de encapsulamiento, ya que su función es
+invocar acciones sin ser responsable de la creación o modificación de los dispositivos. Esta
+separación permite la reutilización de reglas en dispositivos pertenecientes a diferentes usuarios.
+Como conclusión podemos afirmar que este diseño garantiza que los cambios en un módulo (ej. la
+lógica de un dispositivo) tengan un impacto mínimo en los otros módulos (ej. las reglas de
+automatización), facilitando la evolución futura del sistema.
+El diseño propuesto aplica los principios fundamentales de la Programación Orientada a Objetos
+para construir un sistema modular, reutilizable y extensible.
