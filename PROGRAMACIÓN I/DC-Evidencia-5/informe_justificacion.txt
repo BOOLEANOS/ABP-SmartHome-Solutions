@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 Justificación diseño de clases
 El diseño de clases propuesto se fundamenta en la modularidad y la claridad estructural, aplicando
 principios fundamentales de software para asegurar la mantenibilidad y la escalabilidad del
@@ -25,4 +23,3 @@ lógica de un dispositivo) tengan un impacto mínimo en los otros módulos (ej. 
 automatización), facilitando la evolución futura del sistema.
 El diseño propuesto aplica los principios fundamentales de la Programación Orientada a Objetos
 para construir un sistema modular, reutilizable y extensible.
->>>>>>> 50f77eabc3072cfd76b94c22a650aeb34ab915f6
