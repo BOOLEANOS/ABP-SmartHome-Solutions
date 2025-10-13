@@ -1,2 +1,7 @@
 *.pyc
 __pycache__/
+*.swp
+*BACKUP_*
+*BASE_*
+*LOCAL_*
+*REMOTE_*
