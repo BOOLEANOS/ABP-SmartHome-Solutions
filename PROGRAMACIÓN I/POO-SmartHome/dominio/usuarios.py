@@ -1,15 +1,12 @@
 # usuarios.py
 
 class Usuario:
-    def __init__(self, id, nombre, correo, contrasena, rol):
-        self.__id = id
+    def __init__(self, nombre, correo, contrasena, rol):
         self.__nombre = nombre
         self.__correo = correo
         self.__contrasena = contrasena
         self.__rol = rol
 
-    def get_id(self):
-        return self.__id
 
     def get_nombre(self):
         return self.__nombre
@@ -22,9 +19,6 @@ class Usuario:
 
     def get_rol(self):
         return self.__rol
-
-    def set_id(self, id):
-        self.__id = id
 
     def set_nombre(self, nombre):
         self.__nombre = nombre

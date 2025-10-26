@@ -1,6 +1,6 @@
 # gestion_dispositivos.py
 import re
-from dispositivos import Dispositivo
+from dominio.dispositivos import Dispositivo
 
 class GestionDispositivos:
     def __init__(self, dispositivos):

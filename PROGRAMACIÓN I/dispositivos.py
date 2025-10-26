@@ -53,3 +53,14 @@ def cambiar_estado_dispositivo(dispositivos, estado):
             return
 
     print("Dispositivo no encontrado o no pertenece a su cuenta.")
+
+def buscar_dispositivo_por_nombre(dispositivos):
+    nombre = input("Ingrese el nombre del dispositivo: ").strip()
+
+    for d in dispositivos:
+        if d["nombre"].lower() == nombre.lower():
+            estado = "Encendido" if d["estado"] else "Apagado"
+            print(f"{d['id']}. {d['nombre']} ({d['tipo']}) - Estado: {estado}")
+            return
+
+    print("Dispositivo no encontrado o no pertenece a su cuenta.")
