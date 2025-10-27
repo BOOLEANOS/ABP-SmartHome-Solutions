@@ -1,3 +1,4 @@
+
 from dao.dispositivo_dao import DispositivoDAO
 from dominio.dispositivos import Dispositivo
 class GestionIDispositivos:
@@ -5,6 +6,11 @@ class GestionIDispositivos:
         self.__id_usuario = id_usuario
         self.__dispositivo_dao = DispositivoDAO()
         self.__dispositivos = self.__dispositivo_dao.obtener_todos_por_usuario(id_usuario)
+
+# gestion_dispositivos.py
+import re
+from dominio.dispositivos import Dispositivo
+
 
     def get_dispositivos(self):
         self.__dispositivos = self.__dispositivo_dao.obtener_todos_por_usuario(self.__id_usuario)

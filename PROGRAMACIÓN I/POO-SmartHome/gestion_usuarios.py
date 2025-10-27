@@ -33,9 +33,8 @@ class GestionDeUsuarios:
         contrasena = self.__validar_largo_texto("Cree una contraseña: ", 8, 20)
         
         rol = "admin" if not self.usuarios else "usuario"
-        nuevo_id = len(self.usuarios) + 1
         
-        nuevo_usuario = Usuario(nuevo_id, nombre, correo, contrasena, rol)
+        nuevo_usuario = Usuario(nombre, correo, contrasena, rol)
         self.usuarios.append(nuevo_usuario)
         
         print(f"Usuario {nombre} registrado con éxito como {'Administrador' if rol == 'admin' else 'Usuario'}.")
