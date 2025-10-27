@@ -1,4 +1,4 @@
- lorena-pereyra
+ 
 Proyecto de Base de Datos para Smart Home
 Este repositorio contiene el esquema de base de datos y los datos de prueba para  sistema de gestión de hogar inteligente.
 El script SQL define tablas para usuarios, roles, dispositivos, tipos de dispositivos y automatizaciones, incluyendo consultas avanzadas (JOINs y subconsultas) para analizar los datos.

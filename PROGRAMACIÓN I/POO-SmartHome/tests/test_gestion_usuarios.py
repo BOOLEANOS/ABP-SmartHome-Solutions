@@ -7,8 +7,8 @@ from unittest.mock import patch
 @pytest.fixture
 def gestion_con_usuarios():
     usuarios_existentes = [
-        Usuario(1, "Ana", "ana@example.com", "ana123", "admin"),
-        Usuario(2, "Pedro", "pedro@example.com", "pedro123", "estandar")
+        Usuario("Ana", "ana@example.com", "ana123", "admin"),
+        Usuario("Pedro", "pedro@example.com", "pedro123", "estandar")
     ]
     return GestionDeUsuarios(usuarios_existentes)
 
