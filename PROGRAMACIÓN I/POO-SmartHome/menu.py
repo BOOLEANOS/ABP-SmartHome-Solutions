@@ -1,6 +1,7 @@
-from usuarios import registrar_usuario, iniciar_sesion, modificar_rol_usuario, datos_usuario
-from dispositivos import Dispositivo, GestionDispositivos
-from automatizaciones import activar_modo_ahorro, configurar_modo_ahorro, consultar_automatizaciones
+from dao.usuario_dao import registrar_usuario, iniciar_sesion, modificar_rol_usuario, datos_usuario
+from dao.dispositivo_dao import obtener_dispositivos_usuario, crear_dispositivo, eliminar_dispositivo, cambiar_estado_dispositivo
+from dao.automatizacion_dao import activar_modo_ahorro
+from conn.db_conn import crear_conexion
 
 # Variable global para controlar la autenticación
 autenticado = None
@@ -51,79 +52,90 @@ def mostrar_menu_automatizaciones():
     print("3. Volver al menú anterior")
     return input("Seleccione una opción: ")
 
-def buscar_dispositivo_por_nombre(gestion_dispositivos):
+def buscar_dispositivo_por_nombre(usuario_id):
     """Función para buscar dispositivo por nombre"""
     nombre = input("Ingrese el nombre del dispositivo a buscar: ").strip()
     
-    dispositivos = gestion_dispositivos._GestionDispositivos__dispositivos  # Acceder a la lista interna
+    dispositivos = obtener_dispositivos_usuario(usuario_id)
     encontrados = []
     
     for d in dispositivos:
-        if nombre.lower() in d.get_nombre().lower():
+        if nombre.lower() in d["nombre"].lower():
             encontrados.append(d)
     
     if encontrados:
         print(f"\nDispositivos encontrados ({len(encontrados)}):")
         for d in encontrados:
-            print(d.__str__())
+            estado_str = "Encendido" if d["estado"] else "Apagado"
+            print(f"ID: {d['id']}, Nombre: {d['nombre']}, Ubicación: {d['ubicacion']}, Estado: {estado_str}, Tipo: {d['tipo']}")
     else:
         print("No se encontraron dispositivos con ese nombre.")
 
-def gestionar_automatizacion(gestion_dispositivos, usuario):
+def gestionar_automatizacion(usuario):
     opcion = ""
     while opcion != "3":
         opcion = mostrar_menu_automatizaciones()
-        match opcion:
-            case "1":
-                dispositivos = gestion_dispositivos._GestionDispositivos__dispositivos
-                activar_modo_ahorro(dispositivos, usuario)
-            case "2":
-                print("Configurando modo ahorro de energía...")
-                horaOn = input("Ingrese la hora para encender las luces: ")
-                horaOff = input("Ingrese la hora para apagar las luces: ")
-                configurar_modo_ahorro(horaOn, horaOff)
-            case "3":
-                print("Volviendo al menú anterior...")
-            case _:
-                print("Opción inválida. Intente nuevamente.")
+        if opcion == "1":
+            activar_modo_ahorro(usuario["id"])
+        elif opcion == "2":
+            print("Configurando modo ahorro de energía...")
+            horaOn = input("Ingrese la hora para encender las luces: ")
+            horaOff = input("Ingrese la hora para apagar las luces: ")
+            print(f"Modo ahorro configurado: Encender a las {horaOn}, Apagar a las {horaOff}")
+        elif opcion == "3":
+            print("Volviendo al menú anterior...")
+        else:
+            print("Opción inválida. Intente nuevamente.")
 
-def gestionar_dispositivos(gestion_dispositivos, usuario):
+def gestionar_dispositivos(usuario):
     opcion = ""
     while opcion != "6":
         opcion = mostrar_menu_dispositivos()
-        match opcion:
-            case "1":
-                gestion_dispositivos.mostrar_dispositivos()
-            case "2":
-                gestion_dispositivos.crear_dispositivo()
-            case "3":
-                gestion_dispositivos.eliminar_dispositivo_por_nombre()
-            case "4":
-                buscar_dispositivo_por_nombre(gestion_dispositivos)
-            case "5":
-                activar_desactivar_dispositivo(gestion_dispositivos)
-            case "6":
-                print("Volviendo al menú anterior...")
-            case _:
-                print("Opción inválida. Intente nuevamente.")
+        if opcion == "1":
+            dispositivos = obtener_dispositivos_usuario(usuario["id"])
+            if dispositivos:
+                print("\nDispositivos registrados:")
+                for d in dispositivos:
+                    estado_str = "Encendido" if d["estado"] else "Apagado"
+                    print(f"ID: {d['id']}, Nombre: {d['nombre']}, Ubicación: {d['ubicacion']}, Estado: {estado_str}, Tipo: {d['tipo']}")
+            else:
+                print("No hay dispositivos registrados.")
+        elif opcion == "2":
+            crear_dispositivo(usuario["id"])
+        elif opcion == "3":
+            eliminar_dispositivo(usuario["id"])
+        elif opcion == "4":
+            buscar_dispositivo_por_nombre(usuario["id"])
+        elif opcion == "5":
+            activar_desactivar_dispositivo(usuario["id"])
+        elif opcion == "6":
+            print("Volviendo al menú anterior...")
+        else:
+            print("Opción inválida.")
     
-def activar_desactivar_dispositivo(gestion_dispositivos):
+def activar_desactivar_dispositivo(usuario_id):
     opcion = ""
     while opcion != "1" and opcion != "2":
         opcion = mostrar_menu_cambio_estado_dispositivo()
-        match opcion:
-            case "1":
-                gestion_dispositivos.cambiar_estado_dispositivo(True)
-            case "2":
-                gestion_dispositivos.cambiar_estado_dispositivo(False)
-            case _:
-                print("Opción inválida. Intente nuevamente.")
+        if opcion == "1":
+            cambiar_estado_dispositivo(usuario_id, True)
+        elif opcion == "2":
+            cambiar_estado_dispositivo(usuario_id, False)
+        else:
+            print("Opción inválida. Intente nuevamente.")
 
-def mostrar_dispositivos_usuario(gestion_dispositivos, usuario):
+def mostrar_dispositivos_usuario(usuario_id):
     """Función para mostrar dispositivos del usuario"""
-    gestion_dispositivos.mostrar_dispositivos()
+    dispositivos = obtener_dispositivos_usuario(usuario_id)
+    if dispositivos:
+        print("\nDispositivos registrados:")
+        for d in dispositivos:
+            estado_str = "Encendido" if d["estado"] else "Apagado"
+            print(f"ID: {d['id']}, Nombre: {d['nombre']}, Ubicación: {d['ubicacion']}, Estado: {estado_str}, Tipo: {d['tipo']}")
+    else:
+        print("No hay dispositivos registrados.")
 
-def menu_usuario_admin(gestion_dispositivos, usuario, usuarios):
+def menu_usuario_admin(usuario):
     global autenticado
     autenticado = usuario
     sesion_activa = True
@@ -131,12 +143,16 @@ def menu_usuario_admin(gestion_dispositivos, usuario, usuarios):
     while sesion_activa:
         opcion = mostrar_menu_usuario_admin(usuario["nombre"], usuario["rol"])
         if opcion == "1":
-            gestionar_dispositivos(gestion_dispositivos, usuario)
+            gestionar_dispositivos(usuario)
         elif opcion == "2":
-            dispositivos = gestion_dispositivos._GestionDispositivos__dispositivos
-            activar_modo_ahorro(dispositivos, usuario)
+            activar_modo_ahorro(usuario["id"])
         elif opcion == "3":
-            modificar_rol_usuario(usuarios)
+            email = input("Email del usuario a modificar: ")
+            print("\nRoles disponibles:")
+            print("1. admin")
+            print("2. estandar")
+            nuevo_rol_id = input("Seleccione el ID del nuevo rol (1 o 2): ")
+            modificar_rol_usuario(email, nuevo_rol_id)
         elif opcion == "4":
             autenticado = None
             print("Sesión cerrada.")
@@ -144,7 +160,7 @@ def menu_usuario_admin(gestion_dispositivos, usuario, usuarios):
         else:
             print("Opción inválida.")
     
-def menu_usuario_estandar(gestion_dispositivos, usuario):
+def menu_usuario_estandar(usuario):
     global autenticado
     autenticado = usuario
     sesion_activa = True
@@ -155,10 +171,10 @@ def menu_usuario_estandar(gestion_dispositivos, usuario):
             print("Consultando los datos personales...\n")
             datos_usuario(usuario)
         elif opcion == "2":
-            gestionar_automatizacion(gestion_dispositivos, usuario)
+            gestionar_automatizacion(usuario)
         elif opcion == "3":
             print("Consultando dispositivos...\n")
-            mostrar_dispositivos_usuario(gestion_dispositivos, usuario)
+            mostrar_dispositivos_usuario(usuario["id"])
         elif opcion == "4":
             autenticado = None
             sesion_activa = False
@@ -167,25 +183,25 @@ def menu_usuario_estandar(gestion_dispositivos, usuario):
             print("Opción inválida.")
 
 def menu_principal():
-    # Inicializar estructuras de datos
-    usuarios = []
-    lista_dispositivos = []  # Lista vacía de dispositivos
-    gestion_dispositivos = GestionDispositivos(lista_dispositivos)
-    
     app_activa = True
 
     while app_activa:
         opcion = mostrar_menu_principal()
 
         if opcion == "1":
-            registrar_usuario(usuarios)
+            nombre = input("Ingrese su nombre: ")
+            email = input("Ingrese su email: ")
+            password = input("Cree una contraseña: ")
+            registrar_usuario(nombre, email, password)
         elif opcion == "2":
-            usuario = iniciar_sesion(usuarios)
+            email = input("Email: ")
+            password = input("Contraseña: ")
+            usuario = iniciar_sesion(email, password)
             if usuario:  # Solo si el login fue exitoso
                 if usuario["rol"] == "admin":
-                    menu_usuario_admin(gestion_dispositivos, usuario, usuarios)
+                    menu_usuario_admin(usuario)
                 else:
-                    menu_usuario_estandar(gestion_dispositivos, usuario)
+                    menu_usuario_estandar(usuario)
         elif opcion == "3":
             print("¡Hasta luego!")
             app_activa = False
@@ -194,4 +210,12 @@ def menu_principal():
 
 # Ejecutar la aplicación
 if __name__ == "__main__":
+    # Verificar conexión a la base de datos
+    conexion = crear_conexion()
+    if conexion:
+        print("✓ Conectado a la base de datos MySQL")
+        conexion.close()
+    else:
+        print("⚠ No se pudo conectar a la base de datos")
+    
     menu_principal()

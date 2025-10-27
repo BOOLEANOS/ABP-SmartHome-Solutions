@@ -6,8 +6,9 @@ def crear_conexion():
         conexion = mysql.connector.connect(
             host="localhost",      
             user="root",           
-            password="",           
-            database="smarthome"   
+            password="1234",           
+            database="smarthome",
+            buffered=True  # Esto ayuda a evitar el error de resultados no leídos
         )
         if conexion.is_connected():
             return conexion
@@ -15,6 +16,14 @@ def crear_conexion():
         print(f"Error al conectar a la base de datos: {e}")
         return None
 
-def cerrar_conexion(conexion):
-    if conexion and conexion.is_connected():
-        conexion.close()
+def cerrar_conexion(conexion, cursor=None):
+    try:
+        # Cerrar cursor primero si existe
+        if cursor:
+            cursor.close()
+        
+        # Luego cerrar conexión
+        if conexion and conexion.is_connected():
+            conexion.close()
+    except Error as e:
+        print(f"Error al cerrar conexión: {e}")

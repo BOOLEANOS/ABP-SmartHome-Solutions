@@ -1,117 +1,128 @@
-from dominio.dispositivos import Dispositivo
+import mysql.connector
 from conn.db_conn import crear_conexion, cerrar_conexion
-from mysql.connector import Error
 
-class DispositivoDAO:
-    
-    def crear_dispositivo(dispositivo: Dispositivo):
+def obtener_dispositivos_usuario(usuario_id):
+    conexion = None
+    cursor = None
+    try:
         conexion = crear_conexion()
-        if conexion is None:
-            print("No se pudo conectar a la base de datos.")
-            return
+        dispositivos = []
+        if conexion:
+            cursor = conexion.cursor(dictionary=True)
+            query = """
+            SELECT d.id_dispositivo, d.nombre_dispositivo, d.ubicacion, 
+                   d.estado_dispositivo, t.tipo_dispositivo, t.id_tipo
+            FROM Dispositivo d
+            JOIN Tipo_dispositivo t ON d.id_tipo = t.id_tipo
+            WHERE d.id_usuario = %s
+            """
+            cursor.execute(query, (usuario_id,))
+            
+            resultados = cursor.fetchall()
+            
+            for row in resultados:
+                estado_bool = True if row['estado_dispositivo'] == 'encendido' else False
+                dispositivo = {
+                    "id": row['id_dispositivo'],
+                    "nombre": row['nombre_dispositivo'],
+                    "ubicacion": row['ubicacion'],
+                    "estado": estado_bool,
+                    "tipo": row['tipo_dispositivo'],
+                    "tipo_id": row['id_tipo']
+                }
+                dispositivos.append(dispositivo)
+                
+        return dispositivos
         
-        try:
+    except mysql.connector.Error as e:
+        print(f"Error al obtener dispositivos: {e}")
+        return []
+    finally:
+        cerrar_conexion(conexion, cursor)
+
+def crear_dispositivo(usuario_id):
+    conexion = None
+    cursor = None
+    try:
+        nombre = input("Nombre del dispositivo: ").strip()
+        ubicacion = input("Ubicación (cocina, living, comedor, etc.): ").strip()
+        
+        conexion = crear_conexion()
+        if conexion:
             cursor = conexion.cursor()
-            query = """INSERT INTO dispositivos (nombre, ubicacion, estado, tipo)
-                       VALUES (%s, %s, %s, %s)"""
-            valores = (
-                dispositivo.get_nombre(),
-                dispositivo.get_ubicacion(),
-                dispositivo.get_estado(),
-                dispositivo.get_tipo(),
+            
+            # Mostrar tipos disponibles
+            cursor.execute("SELECT * FROM Tipo_dispositivo")
+            tipos = cursor.fetchall()
+            print("\nTipos de dispositivos disponibles:")
+            for tipo in tipos:
+                print(f"{tipo[0]}. {tipo[1]}")
+            
+            tipo_id = input("Seleccione el ID del tipo: ")
+            
+            # Insertar dispositivo
+            cursor.execute(
+                "INSERT INTO Dispositivo (nombre_dispositivo, ubicacion, estado_dispositivo, id_usuario, id_tipo) VALUES (%s, %s, 'apagado', %s, %s)",
+                (nombre, ubicacion, usuario_id, tipo_id)
             )
-            cursor.execute(query, valores)
             conexion.commit()
-            print("Dispositivo agregado correctamente.")
-        except Error as e:
-            print(f"Error al insertar dispositivo: {e}")
-        finally:
-            cerrar_conexion(conexion)
+            print(f"Dispositivo '{nombre}' agregado correctamente.")
+            
+    except mysql.connector.Error as e:
+        print(f"Error al crear dispositivo: {e}")
+    finally:
+        cerrar_conexion(conexion, cursor)
 
-    def obtener_todos():
+def eliminar_dispositivo(usuario_id):
+    conexion = None
+    cursor = None
+    try:
+        nombre = input("Ingrese el nombre del dispositivo a eliminar: ").strip()
+
         conexion = crear_conexion()
-        if conexion is None:
-            print("No se pudo conectar a la base de datos.")
-            return []
-
-        try:
-            cursor = conexion.cursor()
-            cursor.execute("SELECT id, nombre, ubicacion, estado, tipo FROM dispositivos")
-            filas = cursor.fetchall()
-            dispositivos = [Dispositivo(*fila) for fila in filas]
-            return dispositivos
-        except Error as e:
-            print(f"Error al obtener dispositivos: {e}")
-            return []
-        finally:
-            cerrar_conexion(conexion)
-
-    def obtener_por_id(id_dispositivo):
-        conexion = crear_conexion()
-        if conexion is None:
-            return None
-
-        try:
+        if conexion:
             cursor = conexion.cursor()
             cursor.execute(
-                "SELECT id, nombre, ubicacion, estado, tipo FROM dispositivos WHERE id = %s",
-                (id_dispositivo,)
+                "DELETE FROM Dispositivo WHERE nombre_dispositivo = %s AND id_usuario = %s",
+                (nombre, usuario_id)
             )
-            fila = cursor.fetchone()
-            if fila:
-                return Dispositivo(*fila)
+            
+            if cursor.rowcount > 0:
+                conexion.commit()
+                print(f"Dispositivo '{nombre}' eliminado.")
             else:
-                return None
-        except Error as e:
-            print(f"Error al obtener dispositivo por ID: {e}")
-            return None
-        finally:
-            cerrar_conexion(conexion)
+                print("Dispositivo no encontrado.")
+                
+    except mysql.connector.Error as e:
+        print(f"Error al eliminar dispositivo: {e}")
+    finally:
+        cerrar_conexion(conexion, cursor)
 
-    def actualizar_dispositivo(dispositivo: Dispositivo):
+def cambiar_estado_dispositivo(usuario_id, estado):
+    conexion = None
+    cursor = None
+    try:
+        nombre = input("Ingrese el nombre del dispositivo: ").strip()
+
         conexion = crear_conexion()
-        if conexion is None:
-            print("No se pudo conectar a la base de datos.")
-            return
-        
-        try:
+        if conexion:
             cursor = conexion.cursor()
-            query = """UPDATE dispositivos
-                       SET nombre = %s, ubicacion = %s, estado = %s, tipo = %s
-                       WHERE id = %s"""
-            valores = (
-                dispositivo.get_nombre(),
-                dispositivo.get_ubicacion(),
-                dispositivo.get_estado(),
-                dispositivo.get_tipo(),
-                dispositivo.get_id()
+            estado_db = 'encendido' if estado else 'apagado'
+            cursor.execute(
+                "UPDATE Dispositivo SET estado_dispositivo = %s WHERE nombre_dispositivo = %s AND id_usuario = %s",
+                (estado_db, nombre, usuario_id)
             )
-            cursor.execute(query, valores)
-            conexion.commit()
+            
             if cursor.rowcount > 0:
-                print("Dispositivo actualizado correctamente.")
+                conexion.commit()
+                if estado:
+                    print("Dispositivo activado correctamente.")
+                else:
+                    print("Dispositivo desactivado correctamente.")
             else:
-                print("No se encontró el dispositivo con ese ID.")
-        except Error as e:
-            print(f"Error al actualizar dispositivo: {e}")
-        finally:
-            cerrar_conexion(conexion)
-          
-    def eliminar_dispositivo(id_dispositivo):
-        conexion = crear_conexion()
-        if conexion is None:
-            print("No se pudo conectar a la base de datos.")
-            return
-
-        try:
-            cursor = conexion.cursor()
-            cursor.execute("DELETE FROM dispositivos WHERE id = %s", (id_dispositivo,))
-            conexion.commit()
-            if cursor.rowcount > 0:
-                print("Dispositivo eliminado correctamente.")
-            else:
-                print("No se encontró el dispositivo.")
-        except Error as e:
-            print(f"Error al eliminar dispositivo: {e}")
-        finally:
-            cerrar_conexion(conexion)
+                print("Dispositivo no encontrado.")
+                
+    except mysql.connector.Error as e:
+        print(f"Error al cambiar estado: {e}")
+    finally:
+        cerrar_conexion(conexion, cursor)

@@ -1,4 +1,4 @@
-from usuarios import registrar_usuario, iniciar_sesion, modificar_rol_usuario, datos_usuario
+from usuarios import registrar_usuario, iniciar_sesion, modificar_rol_usuarios, datos_usuario
 from dispositivos import *
 from automatizaciones import activar_modo_ahorro, configurar_modo_ahorro, consultar_automatizaciones
 
@@ -166,7 +166,7 @@ def menu_admin(usuarios, dispositivos, automatizaciones, admin):
         print("3. Ver estado de los dispositivos")
         print("4. Salir")
         # bucle principal
-        while True: 
+    while True: 
             mostrar = menu_admin()
             opcion= input("Elige una opcion:")
 
