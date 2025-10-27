@@ -1,7 +1,6 @@
 from usuarios import registrar_usuario, iniciar_sesion, modificar_rol_usuario, datos_usuario
-from dispositivos import Dispositivo, GestionDispositivos
-from automatizaciones import activar_modo_ahorro, configurar_modo_ahorro, consultar_automatizaciones
-
+from dispositivos import GestionDispositivos
+from automatizaciones import activar_modo_ahorro, configurar_modo_ahorro
 # Variable global para controlar la autenticación
 autenticado = None
 

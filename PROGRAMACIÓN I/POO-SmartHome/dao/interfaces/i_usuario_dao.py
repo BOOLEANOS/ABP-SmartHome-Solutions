@@ -1,14 +1,18 @@
-class IUsuarioDAO:
+from abc import ABC, abstractmethod
+
+class IUsuarioDAO(ABC):
   
-  def agregar_usuario(usuario):
-    """Se agrega un nuevo usuario a la base de datos"""
-    pass
+    @abstractmethod
+    def registrar_usuario(self, nombre, email, password):
+        """Registra un nuevo usuario en la base de datos."""
+        pass
 
-  def obtener_usuarios():
-    """Se obtiene todos los usuarios que estan registrados"""
-    pass
+    @abstractmethod
+    def iniciar_sesion(self, email, password):
+        """Inicia sesión y retorna el usuario."""
+        pass
 
-  def buscar_usuario_por_email(email):
-    """Se busca el usuario por su email"""
-    pass
-    
+    @abstractmethod
+    def modificar_rol_usuario(self, email, nuevo_rol):
+        """Modifica el rol de un usuario."""
+        pass
