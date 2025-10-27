@@ -1,6 +1,12 @@
 import mysql.connector
 from conn.db_conn import crear_conexion, cerrar_conexion
 
+def datos_usuario(usuario):
+    """Mostrar los datos del usuario"""
+    print(f"Nombre: {usuario['nombre']}\n"
+          f"Email: {usuario['correo']}\n"
+          f"Contraseña: {usuario['contrasena']}\n"
+          f"Rol: {usuario['rol']}\n")
 def iniciar_sesion(email, password):
     conexion = None
     cursor = None
