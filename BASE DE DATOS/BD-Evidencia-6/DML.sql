@@ -146,7 +146,7 @@ INSERT INTO Dispositivo_Automatizacion (id_dispositivo, id_automatizacion) VALUE
 (11,4),
 (11,5),
 (5,6),
-(6,7);
+(6,7),
 (2,8),
 (4,9),
 (8,10),
